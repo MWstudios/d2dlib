@@ -371,5 +371,7 @@ namespace unvell.D2DLib
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void TestDraw(HANDLE ctx);
+		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+		public static extern HANDLE ContextToHbitmap(HANDLE context);
 	}
 }

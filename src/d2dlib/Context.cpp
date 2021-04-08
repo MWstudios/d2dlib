@@ -139,6 +139,13 @@ void SetContextTextProperties(HANDLE ctx, D2D1_TEXT_ANTIALIAS_MODE antialiasMode
 	context->renderTarget->SetTextAntialiasMode(antialiasMode);
 }
 
+/*void SetCharacterSpacing(HANDLE ctx, D2D1_TEXT_ANTIALIAS_MODE antialiasMode)
+{
+	RetrieveContext(ctx);
+	IDWriteTextAnalyzer::GetGlyphs()
+	context->renderTarget->(antialiasMode);
+}*/
+
 void BeginRender(HANDLE ctx)
 {
 	RetrieveContext(ctx);
@@ -351,4 +358,10 @@ void ReleaseObject(HANDLE handle)
 {
 	ID2D1Resource* object = reinterpret_cast<ID2D1Resource*>(handle);
 	SafeRelease(&object);
+}
+
+HBITMAP ContextToHbitmap(HANDLE ctx)
+{
+	RetrieveContext(ctx);
+	return CreateCompatibleBitmap(GetDC(context->renderTarget->GetHwnd()), context->renderTarget->GetSize().width, context->renderTarget->GetSize().height);
 }

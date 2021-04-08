@@ -161,6 +161,7 @@ extern "C"
 	D2DLIB_API void ReleaseObject(HANDLE handle);
 
 	D2DLIB_API void TestDraw(HANDLE context);
+	D2DLIB_API HBITMAP ContextToHbitmap(HANDLE ctx);
 }
 
 #endif /* __D2DLIB_H__ */

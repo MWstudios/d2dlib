@@ -459,6 +459,10 @@ namespace unvell.D2DLib
 		{
 			D2D.SetDPI(this.Device.Handle, dpiX, dpiY);
 		}
+		public HANDLE GetHBitmap()
+    {
+			return D2D.ContextToHbitmap(this.Handle);
+    }
 	}
 
 }
