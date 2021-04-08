@@ -335,6 +335,15 @@ namespace unvell.D2DLib
 		//
 		Aliased = 1,
 	}
+	public enum D2DTextAntialiasMode
+	{
+		ForceDword=-1,
+		Default,
+		/// <summary>Creates red and blue artifacts around the letters to make them look smooth.</summary>
+		ClearType,
+		/// <summary>Smoothes edges using opacity, no artifacts.</summary>
+		Grayscale, None
+	}
 
 	public enum D2DBitmapInterpolationMode
 	{

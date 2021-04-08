@@ -80,21 +80,20 @@ namespace unvell.D2DLib
 		}
 
 		private bool antialias = true;
+		private D2DTextAntialiasMode textantialias;
 
 		public bool Antialias
 		{
 			get { return this.antialias; }
-			set
-			{
-				if (this.antialias != value)
-				{
-					D2D.SetContextProperties(this.Handle,
-						value ? D2DAntialiasMode.PerPrimitive : D2DAntialiasMode.Aliased);
-
-					this.antialias = value;
-				}
-			}
+			set { if (this.antialias != value)
+				{ D2D.SetContextProperties(this.Handle, value ? D2DAntialiasMode.PerPrimitive : D2DAntialiasMode.Aliased); this.antialias = value; } }
 		}
+		public D2DTextAntialiasMode TextAntialias
+    {
+      get { return this.textantialias; }
+      set { if (this.textantialias != value) 
+				{ D2D.SetContextTextProperties(this.Handle, value); this.textantialias = value; } }
+    }
 
 		public void DrawLine(FLOAT x1, FLOAT y1, FLOAT x2, FLOAT y2, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
@@ -413,7 +412,7 @@ namespace unvell.D2DLib
 			D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
 		}
 
-    public void DrawText(string text, D2DColor color, string fontName, float fontSize, D2DRect rect,
+		public void DrawText(string text, D2DColor color, string fontName, float fontSize, D2DRect rect,
 			DWriteTextAlignment halign = DWriteTextAlignment.Leading,
 			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,

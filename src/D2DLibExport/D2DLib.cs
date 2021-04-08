@@ -71,6 +71,8 @@ namespace unvell.D2DLib
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetContextProperties([In] HANDLE context, D2DAntialiasMode antialiasMode = D2DAntialiasMode.PerPrimitive);
+		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void SetContextTextProperties([In] HANDLE context, D2DTextAntialiasMode antialiasMode = D2DTextAntialiasMode.Default);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern HANDLE BeginRender([In] HANDLE context);
@@ -201,7 +203,8 @@ namespace unvell.D2DLib
 			[In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			[In] DWriteFontWeight fweight = DWriteFontWeight.Normal,
 			[In] DWriteFontStyle fstyle = DWriteFontStyle.Normal,
-			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal);
+			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal
+			);
 
 		[DllImport(DLL_NAME, EntryPoint = "MeasureText", CharSet = CharSet.Unicode,
 			CallingConvention = CallingConvention.Cdecl)]
