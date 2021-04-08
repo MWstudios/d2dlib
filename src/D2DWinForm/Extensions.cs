@@ -70,7 +70,7 @@ namespace unvell.D2DLib.WinForm
 			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
 			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
-			var rect = new D2DRect(x, y, 9999999, 9999999);
+			var rect = new D2DRect(x, y, int.MaxValue, int.MaxValue);
 			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
 		}
 
@@ -79,7 +79,7 @@ namespace unvell.D2DLib.WinForm
 			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
 			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
-			var rect = new D2DRect(location.X, location.Y, 9999999, 9999999);
+			var rect = new D2DRect(location.X, location.Y, int.MaxValue, int.MaxValue);
 			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
 		}
 
@@ -88,7 +88,7 @@ namespace unvell.D2DLib.WinForm
 			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
 			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
-			var rect = new D2DRect(location.X, location.Y, 9999999, 9999999);
+			var rect = new D2DRect(location.X, location.Y, int.MaxValue, int.MaxValue);
 			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
 		}
 	}

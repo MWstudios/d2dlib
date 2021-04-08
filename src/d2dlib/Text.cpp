@@ -34,8 +34,8 @@ D2DLIB_API void DrawString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
 	ID2D1SolidColorBrush* brush = NULL;
 	IDWriteTextFormat* textFormat = NULL;
 
-	HRESULT hr = context->writeFactory->CreateTextFormat(fontName, NULL, fweight, fstyle, fstretch, fontSize, L"", //locale
-		&textFormat);
+	HRESULT hr = context->writeFactory->CreateTextFormat(fontName, NULL, fweight, fstyle, fstretch,
+		fontSize, L"", /*locale*/ &textFormat);
 
 	if (SUCCEEDED(hr) && textFormat != NULL)
 	{
