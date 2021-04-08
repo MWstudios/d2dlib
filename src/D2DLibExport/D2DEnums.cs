@@ -390,7 +390,23 @@ namespace unvell.D2DLib
 		/// </summary>
 		Center
 	};
-
+	/// <summary> Specifies a member of the font family (such as Arial Black). </summary>
+	public enum DWriteFontWeight
+	{
+		Thin = 100, ExtraLight = 200, Light = 300, SemiLight = 350, Normal = 400, Medium = 500, SemiBold = 600, Bold = 700, ExtraBold = 800, Black = 900, ExtraBlack = 950
+	}
+	public enum DWriteFontStretch
+	{
+		Undefined, UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
+	}
+	public enum DWriteFontStyle
+	{
+		Normal,
+		/// <summary> Force shears the text without using the italic variation.</summary>
+		Oblique,
+		/// <summary> Uses the italic member of the font family, just as it was designed.</summary>
+		Italic
+	}
 	/// <summary>
 	/// Alignment of paragraph text along the flow direction axis relative to the
 	/// flow's beginning and ending edge of the layout box.

@@ -402,19 +402,25 @@ namespace unvell.D2DLib
 				DWriteTextAlignment.Center, DWriteParagraphAlignment.Center);
 		}
 
-    public void DrawText(string text, D2DColor color, string fontName, float fontSize, FLOAT x, FLOAT y,
-      DWriteTextAlignment halign = DWriteTextAlignment.Leading,
-      DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near)
-    {
-      D2DRect rect = new D2DRect(x, y, 9999999, 9999999);  // FIXME: avoid magic number
-      D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign);
-    }
+		public void DrawText(string text, D2DColor color, string fontName, float fontSize, FLOAT x, FLOAT y,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading,
+			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
+			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
+			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			D2DRect rect = new D2DRect(x, y, int.MaxValue, int.MaxValue);
+			D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
+		}
 
     public void DrawText(string text, D2DColor color, string fontName, float fontSize, D2DRect rect,
 			DWriteTextAlignment halign = DWriteTextAlignment.Leading,
-			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near)
+			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
+			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
+			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
-			D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign);
+			D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
 		}
 
 		public D2DSize MeasureText(string text, string fontName, float fontSize, D2DSize placeSize)

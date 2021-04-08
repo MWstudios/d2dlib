@@ -26,19 +26,15 @@
 #include "Text.h"
 
 D2DLIB_API void DrawString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
-													 LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
-													 DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign)
+	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect, DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
+	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle, DWRITE_FONT_STRETCH fstretch)
 {
 	RetrieveContext(ctx);
 
 	ID2D1SolidColorBrush* brush = NULL;
 	IDWriteTextFormat* textFormat = NULL;
 
-	HRESULT hr = context->writeFactory->CreateTextFormat(fontName,
-		NULL,
-		DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
-		fontSize,
-		L"", //locale
+	HRESULT hr = context->writeFactory->CreateTextFormat(fontName, NULL, fweight, fstyle, fstretch, fontSize, L"", //locale
 		&textFormat);
 
 	if (SUCCEEDED(hr) && textFormat != NULL)

@@ -34,7 +34,7 @@ using HWND = System.IntPtr;
 using HANDLE = System.IntPtr;
 using HRESULT = System.Int64;
 using BOOL = System.Int32;
-using System.Drawing.Drawing2D;
+using System.Drawing;
 
 namespace unvell.D2DLib
 {
@@ -198,7 +198,10 @@ namespace unvell.D2DLib
 		public static extern void DrawText([In] HANDLE context, [In] string text, [In] D2DColor color,
 			[In] string fontName, [In] FLOAT fontSize, [In] ref D2DRect rect,
 			[In] DWriteTextAlignment halign = DWriteTextAlignment.Leading,
-			[In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near);
+			[In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			[In] DWriteFontWeight fweight = DWriteFontWeight.Normal,
+			[In] DWriteFontStyle fstyle = DWriteFontStyle.Normal,
+			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal);
 
 		[DllImport(DLL_NAME, EntryPoint = "MeasureText", CharSet = CharSet.Unicode,
 			CallingConvention = CallingConvention.Cdecl)]
