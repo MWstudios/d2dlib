@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>d2dwinform</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:unvell.D2DLib.WinForm.Win32.WMessages" -->
+        <member name="M:unvell.D2DLib.WinForm.Win32.GetParent(System.IntPtr)">
+            <summary>
+            Retrieves a handle to the specified window's parent or owner.
+            To retrieve a handle to a specified ancestor, use the GetAncestor function.
+            </summary>
+            <param name="hwnd">A handle to the window whose parent window handle is to be retrieved.</param>
+            <returns>If the window is a child window, the return value is a handle to the parent window. 
+            If the window is a top-level window with the WS_POPUP style, the return value is a handle to the owner window.
+            If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            This function typically fails for one of the following reasons:
+            <ul><li>The window is a top-level window that is unowned or does not have the WS_POPUP style.</li>
+            <li>The owner window has WS_POPUP style.</li></ul></returns>
+            <seealso cref="!:#GetAncestor"/>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.GetAncestor(System.IntPtr,System.UInt32)">
+            <summary>
+            Retrieves the handle to the ancestor of the specified window.
+            </summary>
+            <param name="hwnd">A handle to the window whose ancestor is to be retrieved. 
+            If this parameter is the desktop window, the function returns NULL.</param>
+            <param name="gaFlags">The ancestor to be retrieved. This parameter can be one of the GAFlag enum.</param>
+            <returns></returns>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.GetWindow(System.IntPtr,System.UInt32)">
+            <summary>
+            Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window.
+            </summary>
+            <param name="hwnd">A handle to a window.
+            The window handle retrieved is relative to this window, based on the value of the uCmd parameter.</param>
+            <param name="wCMD">The relationship between the specified window and the window whose handle is to be retrieved.
+            This parameter can be one of the following values.</param>
+            <returns></returns>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_HIDE">
+            <summary>
+            Hides the window and activates another window.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_MAXIMIZE">
+            <summary>
+            Maximizes the specified window.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_MINIMIZE">
+            <summary>
+            Minimizes the specified window and activates the next top-level window in the z-order.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_RESTORE">
+            <summary>
+            Activates and displays the window. If the window is minimized or maximized, the system restores it to its original size and position.
+            An application should specify this flag when restoring a minimized window.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOW">
+            <summary>
+            Activates the window and displays it in its current size and position.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOWMAXIMIZED">
+            <summary>
+            Activates the window and displays it as a maximized window.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOWMINIMIZED">
+            <summary>
+            Activates the window and displays it as a minimized window.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOWMINNOACTIVE">
+            <summary>
+            Displays the window as a minimized window.
+            This value is similar to SW_SHOWMINIMIZED, except the window is not activated.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOWNA">
+            <summary>
+            Displays the window in its current size and position.
+            This value is similar to SW_SHOW, except the window is not activated.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOWNOACTIVATE">
+            <summary>
+            Displays a window in its most recent size and position.
+            This value is similar to SW_SHOWNORMAL, except the window is not activated.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.ShowWindowCmd.SW_SHOWNORMAL">
+            <summary>
+            Activates and displays a window. If the window is minimized or maximized, 
+            the system restores it to its original size and position. 
+            An application should specify this flag when displaying the window for the first time.
+            </summary>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.GetWindowPlacement(System.IntPtr,unvell.D2DLib.WinForm.Win32.WindowPlacement@)">
+            <summary>
+            Retrieves the show state and the restored, minimized, and maximized positions of the specified window.
+            </summary>
+            <param name="hWnd">A handle to the window.</param>
+            <param name="lpwndpl">A pointer to the WINDOWPLACEMENT structure that receives the show state and position information. 
+            Before calling GetWindowPlacement, set the length member to sizeof(WINDOWPLACEMENT).
+            GetWindowPlacement fails if lpwndpl-> length is not set correctly.</param>
+            <returns>If the function succeeds, the return value is true.
+            If the function fails, the return value is false. To get extended error information, call GetLastError.</returns>
+        </member>
+        <member name="T:unvell.D2DLib.WinForm.Win32.WindowPlacement">
+            <summary>
+            Contains information about the placement of a window on the screen.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.WindowPlacement.length">
+            <summary>
+            The length of the structure, in bytes. Before calling the GetWindowPlacement or SetWindowPlacement functions, set this member to sizeof(WINDOWPLACEMENT).
+            GetWindowPlacement and SetWindowPlacement fail if this member is not set correctly.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.WindowPlacement.flags">
+            <summary>
+            The flags that control the position of the minimized window and the method by which the window is restored. This member can be one or more of the following values.
+            Value	Meaning 
+            WPF_ASYNCWINDOWPLACEMENT	0x0004	If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window. This prevents the calling thread from blocking its execution while other threads process the request.
+            WPF_RESTORETOMAXIMIZED		0x0002	The restored window will be maximized, regardless of whether it was maximized before it was minimized. This setting is only valid the next time the window is restored. It does not change the default restoration behavior.
+            																	This flag is only valid when the SW_SHOWMINIMIZED value is specified for the showCmd member.
+            WPF_SETMINPOSITION				0x0001	The coordinates of the minimized window may be specified.
+            																	This flag must be specified if the coordinates are set in the ptMinPosition member.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.WindowPlacement.showCmd">
+            <summary>
+            The current show state of the window. This member can be one of the following values.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.WindowPlacement.ptMinPosition">
+            <summary>
+            The coordinates of the window's upper-left corner when the window is minimized.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.WindowPlacement.ptMaxPosition">
+            <summary>
+            The coordinates of the window's upper-left corner when the window is maximized.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.WindowPlacement.rcNormalPosition">
+            <summary>
+            The window's coordinates when the window is in the restored position.
+            </summary>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.GetWindowRgn(System.IntPtr,System.Drawing.Region@)">
+            <summary>
+            The GetWindowRgn function obtains a copy of the window region of a window.
+            The window region of a window is set by calling the SetWindowRgn function. 
+            The window region determines the area within the window where the system
+            permits drawing. The system does not display any portion of a window that
+            lies outside of the window region
+            </summary>
+            <param name="hWnd">Handle to the window whose window region is to be obtained.</param>
+            <param name="hRgn">Handle to the region which will be modified to represent the window region.</param>
+            <returns>The return value specifies the type of the region that the function obtains. It can be one of the following values.
+            NULLREGION - The region is empty.
+            SIMPLEREGION - The region is a single rectangle.
+            COMPLEXREGION - The region is more than one rectangle.
+            ERROR - The specified window does not have a region, 
+            				or an error occurred while attempting to return the region.</returns>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.GAFlag.GA_PARENT">
+            <summary>
+            Retrieves the parent window. This does not include the owner, as it does with the GetParent function.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.GAFlag.GA_ROOT">
+            <summary>
+            Retrieves the root window by walking the chain of parent windows.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.GAFlag.GA_ROOTOWNER">
+            <summary>
+            Retrieves the owned root window by walking the chain of parent and owner windows returned by GetParent.
+            </summary>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.DwmGetWindowAttribute(System.IntPtr,System.Int32,System.Drawing.Rectangle@,System.Int32)">
+            <summary>
+            Retrieves the current value of a specified attribute applied to a window.
+            </summary>
+            <param name="hwnd"></param>
+            <param name="dwAttribute"></param>
+            <param name="pvAttribute"></param>
+            <param name="cbAttribute"></param>
+            <returns></returns>
+        </member>
+        <member name="T:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute">
+            <summary>
+            Flags used by the DwmGetWindowAttribute and DwmSetWindowAttribute
+            functions to specify window attributes for non-client rendering.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_NCRENDERING_ENABLED">
+            <summary>
+            Use with DwmGetWindowAttribute. Discovers whether non-client rendering is enabled. 
+            The retrieved value is of type BOOL. TRUE if non-client rendering is enabled; 
+            otherwise, FALSE.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_NCRENDERING_POLICY">
+            <summary>
+            Use with DwmSetWindowAttribute. Sets the non-client rendering policy. 
+            The pvAttribute parameter points to a value from the DWMNCRENDERINGPOLICY enumeration.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_TRANSITIONS_FORCEDISABLED">
+            <summary>
+            Use with DwmSetWindowAttribute. Enables or forcibly disables DWM transitions. 
+            The pvAttribute parameter points to a value of TRUE to disable transitions or FALSE to enable transitions.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_ALLOW_NCPAINT">
+            <summary>
+            Use with DwmSetWindowAttribute. Enables content rendered in the non-client area to be visible on the frame drawn by DWM. 
+            The pvAttribute parameter points to a value of TRUE to enable content rendered in the non-client area to be visible on the frame; otherwise, it points to FALSE.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_CAPTION_BUTTON_BOUNDS">
+            <summary>
+            Use with DwmGetWindowAttribute. Retrieves the bounds of the caption button area in the window-relative space. 
+            The retrieved value is of type RECT.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_NONCLIENT_RTL_LAYOUT">
+            <summary>
+            Use with DwmSetWindowAttribute. Specifies whether non-client content is right-to-left (RTL) mirrored. 
+            The pvAttribute parameter points to a value of TRUE if the non-client content is right-to-left (RTL) mirrored; otherwise, it points to FALSE.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_FORCE_ICONIC_REPRESENTATION">
+            <summary>
+            Use with DwmSetWindowAttribute. Forces the window to display an iconic thumbnail or 
+            peek representation (a static bitmap), even if a live or snapshot representation of the window is available. 
+            This value normally is set during a window's creation and not changed throughout the window's lifetime. 
+            Some scenarios, however, might require the value to change over time. 
+            The pvAttribute parameter points to a value of TRUE to require a iconic thumbnail or peek representation; 
+            otherwise, it points to FALSE.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_FLIP3D_POLICY">
+            <summary>
+            Use with DwmSetWindowAttribute. Sets how Flip3D treats the window. 
+            The pvAttribute parameter points to a value from the DWMFLIP3DWINDOWPOLICY enumeration.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_EXTENDED_FRAME_BOUNDS">
+            <summary>
+            Use with DwmGetWindowAttribute. Retrieves the extended frame bounds rectangle in screen space. 
+            The retrieved value is of type RECT.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_HAS_ICONIC_BITMAP">
+            <summary>
+            Use with DwmSetWindowAttribute. The window will provide a bitmap for use by DWM as an iconic thumbnail or 
+            peek representation (a static bitmap) for the window. DWMWA_HAS_ICONIC_BITMAP can be specified 
+            with DWMWA_FORCE_ICONIC_REPRESENTATION. DWMWA_HAS_ICONIC_BITMAP normally is set during a window's 
+            creation and not changed throughout the window's lifetime. Some scenarios, however, might require 
+            the value to change over time. The pvAttribute parameter points to a value of TRUE to inform DWM that 
+            the window will provide an iconic thumbnail or peek representation; otherwise, it points to FALSE.
+            Windows Vista and earlier:  This value is not supported.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_DISALLOW_PEEK">
+            <summary>
+            Use with DwmSetWindowAttribute. Do not show peek preview for the window. The peek view shows a 
+            full-sized preview of the window when the mouse hovers over the window's thumbnail in the taskbar. 
+            If this attribute is set, hovering the mouse pointer over the window's thumbnail 
+            dismisses peek (in case another window in the group has a peek preview showing). 
+            The pvAttribute parameter points to a value of TRUE to prevent peek functionality or FALSE to allow it.
+            Windows Vista and earlier:  This value is not supported.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_EXCLUDED_FROM_PEEK">
+            <summary>
+            Use with DwmSetWindowAttribute. Prevents a window from fading to a glass sheet when peek is invoked. 
+            The pvAttribute parameter points to a value of TRUE to prevent the window from fading during another
+            window's peek or FALSE for normal behavior.
+            Windows Vista and earlier:  This value is not supported.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_CLOAK">
+            <summary>
+            Do not use.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_CLOAKED">
+            <summary>
+            Use with DwmGetWindowAttribute. If the window is cloaked, provides one of the following values 
+            explaining why:
+            Name									Value			Meaning
+            DWM_CLOAKED_APP				0x0000001	The window was cloaked by its owner application.
+            DWM_CLOAKED_SHELL			0x0000002	The window was cloaked by the Shell.
+            DWM_CLOAKED_INHERITED	0x0000004	The cloak value was inherited from its owner window.
+            Windows 7 and earlier:  This value is not supported.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_FREEZE_REPRESENTATION">
+            <summary>
+            Use with DwmSetWindowAttribute. Freeze the window's thumbnail image with its current visuals. 
+            Do no further live updates on the thumbnail image to match the window's contents.
+            Windows 7 and earlier:  This value is not supported.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.DwmWindowAttribute.DWMWA_LAST">
+            <summary>
+            The maximum recognized DWMWINDOWATTRIBUTE value, used for validation purposes.
+            </summary>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.GetVersionEx(unvell.D2DLib.WinForm.Win32.OSVersionInfo@)">
+            <summary>
+            Retrieves information about the current operating system.
+            </summary>
+            <param name="??"></param>
+            <returns></returns>
+        </member>
+        <member name="T:unvell.D2DLib.WinForm.Win32.OSVersionInfo">
+            <summary>
+            Contains operating system version information.
+            The information includes major and minor version numbers, 
+            a build number, a platform identifier, and descriptive text about the 
+            operating system. This structure is used with the GetVersionEx function.
+            To obtain additional version information, use the OSVERSIONINFOEX 
+            structure with GetVersionEx instead.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.OSVersionInfo.dwOSVersionInfoSize">
+            <summary>
+            The size of this data structure, in bytes. 
+            Set this member to sizeof(OSVERSIONINFO).
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.OSVersionInfo.dwMajorVersion">
+            <summary>
+            The major version number of the operating system. 
+            For more information, see Remarks.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.OSVersionInfo.dwMinorVersion">
+            <summary>
+            The minor version number of the operating system. 
+            For more information, see Remarks.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.OSVersionInfo.dwBuildNumber">
+            <summary>
+            The build number of the operating system.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.OSVersionInfo.dwPlatformId">
+            <summary>
+            The operating system platform. This member can be the following value.
+            VER_PLATFORM_WIN32_NT = 2 : The operating system is Windows 7,
+            Windows Server 2008, Windows Vista, Windows Server 2003, Windows XP,
+            or Windows 2000.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.OSVersionInfo.szCSDVersion">
+            <summary>
+            A null-terminated string, such as "Service Pack 3", that indicates
+            the latest Service Pack installed on the system. 
+            If no Service Pack has been installed, the string is empty.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.Modifiers.MOD_ALT">
+            <summary>
+            Either ALT key must be held down.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.Modifiers.MOD_CONTROL">
+            <summary>
+            Either CTRL key must be held down.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.Modifiers.MOD_SHIFT">
+            <summary>
+            Either SHIFT key must be held down.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.Modifiers.MOD_WIN">
+            <summary>
+            Either WINDOWS key was held down. These keys are labeled with the Windows logo. 
+            Keyboard shortcuts that involve the WINDOWS key are reserved for use by the operating system.
+            </summary>
+        </member>
+        <member name="F:unvell.D2DLib.WinForm.Win32.Modifiers.MOD_NOREPEAT">
+            <summary>
+            Changes the hotkey behavior so that the keyboard auto-repeat does not yield multiple hotkey notifications.
+            </summary>
+            
+            <remarks>Windows Vista and Windows XP/2000:  This flag is not supported.</remarks>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.RegisterHotKey(System.IntPtr,System.Int32,System.UInt32,System.Windows.Forms.Keys)">
+            <summary>
+            Defines a system-wide hot key.
+            </summary>
+            
+            <param name="hWnd">A handle to the window that will receive WM_HOTKEY messages generated by the hot key. 
+            If this parameter is NULL, WM_HOTKEY messages are posted to the message queue of the calling thread and 
+            must be processed in the message loop.</param>
+            
+            <param name="id">The identifier of the hot key. If the hWnd parameter is NULL, 
+            then the hot key is associated with the current thread rather than with a particular window. 
+            If a hot key already exists with the same hWnd and id parameters, see Remarks for the action taken.</param>
+            
+            <param name="control">The keys that must be pressed in combination with the key specified by
+            the uVirtKey parameter in order to generate the WM_HOTKEY message. 
+            The fsModifiers parameter can be a combination of the values of enum Modifiers.</param>
+            
+            <param name="vk">The virtual-key code of the hot key. See Virtual Key Codes.</param>
+            
+            <returns>If the function succeeds, the return value is nonzero.
+            If the function fails, the return value is zero. To get extended error information, call GetLastError.</returns>
+            
+            <remarks>
+            When a key is pressed, the system looks for a match against all hot keys. Upon finding a match, 
+            the system posts the WM_HOTKEY message to the message queue of the window with which the hot key is associated.
+            If the hot key is not associated with a window, then the WM_HOTKEY message is posted to the thread associated with the hot key.
+            
+            This function cannot associate a hot key with a window created by another thread.
+            
+            RegisterHotKey fails if the keystrokes specified for the hot key have already been registered by another hot key.
+            If a hot key already exists with the same hWnd and id parameters, it is maintained along with the new hot key. 
+            The application must explicitly call UnregisterHotKey to unregister the old hot key.
+            
+            Windows Server 2003, Windows XP, and Windows 2000:  If a hot key already exists with the same hWnd and id parameters, 
+            it is replaced by the new hot key.
+            
+            The F12 key is reserved for use by the debugger at all times, so it should not be registered as a hot key.
+            Even when you are not debugging an application, F12 is reserved in case a kernel-mode debugger or a just-in-time 
+            debugger is resident.
+            
+            An application must specify an id value in the range 0x0000 through 0xBFFF. A shared DLL must specify a value
+            in the range 0xC000 through 0xFFFF (the range returned by the GlobalAddAtom function). 
+            To avoid conflicts with hot-key identifiers defined by other shared DLLs, a DLL should use the GlobalAddAtom function
+            to obtain the hot-key identifier.
+            </remarks>
+            
+            <seealso cref="M:unvell.D2DLib.WinForm.Win32.UnregisterHotKey(System.IntPtr,System.Int32)"/>
+        </member>
+        <member name="M:unvell.D2DLib.WinForm.Win32.UnregisterHotKey(System.IntPtr,System.Int32)">
+             <summary>
+             Frees a hot key previously registered by the calling thread.
+             </summary>
+             
+             <param name="hWnd">A handle to the window associated with the hot key to be freed. 
+             This parameter should be NULL if the hot key is not associated with a window.</param>
+             
+             <param name="id">The identifier of the hot key to be freed.</param>
+            
+             <returns>If the function succeeds, the return value is nonzero.
+             If the function fails, the return value is zero. To get extended error information, call GetLastError.</returns>
+        </member>
+    </members>
+</doc>
