@@ -192,17 +192,21 @@ namespace unvell.D2DLib
 		}
 
 		public void DrawPolygon(D2DPoint[] points,
-			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DColor fillColor)
+			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DColor fillColor,
+			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
+			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
 		{
-			D2D.DrawPolygon(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillColor);
+			D2D.DrawPolygon(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillColor, startCap, endCap, gapCap, lineJoin);
 		}
 
 		public void DrawPolygon(D2DPoint[] points,
-			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DBrush fillBrush)
+			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DBrush fillBrush,
+			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
+			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
 		{
-			D2D.DrawPolygonWithBrush(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillBrush.Handle);
+			D2D.DrawPolygonWithBrush(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin);
 		}
-
+		/*
     [Obsolete("FillPolygon will be removed from later versions. Use DrawPolygon instead")]
     public void FillPolygon(D2DPoint[] points, D2DColor fillColor)
 		{
@@ -214,7 +218,7 @@ namespace unvell.D2DLib
 		{
 			D2D.DrawPolygonWithBrush(this.Handle, points, (uint)points.Length, D2DColor.Transparent, 0, D2DDashStyle.Solid, brush.Handle);
 		}
-
+		*/
 #if DEBUG
 		public void TestDraw()
 		{

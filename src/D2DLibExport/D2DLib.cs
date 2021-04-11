@@ -236,11 +236,13 @@ namespace unvell.D2DLib
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawPolygon(HANDLE ctx, D2DPoint[] points, UINT count,
-			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DColor fillColor);
+			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DColor fillColor,
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawPolygonWithBrush(HANDLE ctx, D2DPoint[] points, UINT count,
-			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, HANDLE brushHandler);
+			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, HANDLE brushHandler,
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetPathStartPoint(HANDLE ctx, D2DPoint startPoint);

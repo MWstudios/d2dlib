@@ -292,7 +292,8 @@ void DrawBeziers(HANDLE ctx, D2D1_BEZIER_SEGMENT* bezierSegments, UINT count,
 }
 
 void DrawPolygon(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
-	D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, D2D1_COLOR_F fillColor)
+	D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, D2D1_COLOR_F fillColor,
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
 {
 	RetrieveContext(ctx);
 	ID2D1SolidColorBrush* fillBrush = NULL;
@@ -306,13 +307,14 @@ void DrawPolygon(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 	if (fillBrush != NULL) {
 		BrushContext brushCtx;
 		brushCtx.brush = fillBrush;
-		DrawPolygonWithBrush(ctx, points, count, strokeColor, strokeWidth, dashStyle, &brushCtx);
+		DrawPolygonWithBrush(ctx, points, count, strokeColor, strokeWidth, dashStyle, &brushCtx, startCap, endCap, gapCap, lineJoin);
 		SafeRelease(&fillBrush);
 	}
 }
 
 void DrawPolygonWithBrush(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
-	D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle)
+	D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle,
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
 {
 	RetrieveContext(ctx);
 	HRESULT hr;
@@ -351,17 +353,10 @@ void DrawPolygonWithBrush(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 
 		ID2D1StrokeStyle *strokeStyle = NULL;
 
-		if (dashStyle != D2D1_DASH_STYLE_SOLID)
-		{
-			factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
-				D2D1_CAP_STYLE_FLAT,
-				D2D1_CAP_STYLE_FLAT,
-				D2D1_CAP_STYLE_ROUND,
-				D2D1_LINE_JOIN_MITER,
-				10.0f,
-				dashStyle,
-				0.0f), NULL, 0, &strokeStyle);
-		}
+		//if (dashStyle != D2D1_DASH_STYLE_SOLID)
+		//{
+			factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyle);
+		//}
 
 		if (strokeBrush != NULL) {
 			renderTarget->DrawGeometry(path, strokeBrush, strokeWidth, strokeStyle);

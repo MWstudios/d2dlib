@@ -69,7 +69,9 @@ extern "C"
 	D2DLIB_API void GetGeometryTransformedBounds(HANDLE pathCtx, __in D2D1_MATRIX_3X2_F* mat3x2, __out D2D1_RECT_F* rect);
 
 	D2DLIB_API void DrawPolygon(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
-		D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, D2D1_COLOR_F fillColor);
+		D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, D2D1_COLOR_F fillColor,
+		D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin);
 	D2DLIB_API void DrawPolygonWithBrush(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
-		D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle);
+		D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle,
+		D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin);
 }

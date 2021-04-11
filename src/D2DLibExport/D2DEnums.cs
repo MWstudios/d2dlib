@@ -290,27 +290,26 @@ namespace unvell.D2DLib
 	/// </summary>
 	public enum D2DCapStyle
 	{
-		/// <summary>
-		/// Flat line cap.
-		/// </summary>
-		Flat = 0,
-		
-		/// <summary>
-		/// Square line cap.
-		/// </summary>
-		Square = 1,
-		
-		/// <summary>
-		/// Round line cap.
-		/// </summary>
-		Round = 2,
-		
-		/// <summary>
-		/// Triangle line cap.
-		/// </summary>
-		Triangle = 3
+		/// <summary> Flat line cap. </summary>
+		Flat,
+		/// <summary> Square line cap. </summary>
+		Square,
+		/// <summary> Round line cap. </summary>
+		Round,
+		/// <summary> Triangle line cap. </summary>
+		Triangle
 	}
-
+	public enum D2DLineJoinStyle
+  {
+		/// <summary> Pointy vertices.</summary>
+		Miter,
+		/// <summary> Beveled vertices.</summary>
+		Bevel,
+		/// <summary> Rounded vertices.</summary>
+		Round,
+		/// <summary> Beveled vertices, but pointy at lower angles.</summary>
+		MitelOrBevel
+	}
 	public enum D2DArcSize
 	{
 		Small = 0,
