@@ -78,21 +78,54 @@ namespace unvell.D2DLib
 			return handle == HANDLE.Zero ? null : new D2DSolidColorBrush(handle, color);
 		}
 
-		public D2DLinearGradientBrush CreateLinearGradientBrush(D2DPoint startPoint, D2DPoint endPoint,
-																														D2DGradientStop[] gradientStops)
+		public D2DLinearGradientBrush CreateLinearGradientBrush(float start_x, float start_y, float end_x, float end_y, D2DGradientStop[] gradientStops)
+		{
+			return CreateLinearGradientBrush(new D2DPoint(start_x, start_y), new D2DPoint(end_x, end_y), gradientStops);
+		}
+		public D2DLinearGradientBrush CreateLinearGradientBrush(decimal start_x, decimal start_y, decimal end_x, decimal end_y, D2DGradientStop[] gradientStops)
+		{
+			return CreateLinearGradientBrush(new D2DPoint((float)start_x, (float)start_y), new D2DPoint((float)end_x, (float)end_y), gradientStops);
+		}
+		public D2DLinearGradientBrush CreateLinearGradientBrush(D2DPoint startPoint, D2DPoint endPoint, D2DGradientStop[] gradientStops)
 		{
 			HANDLE handle = D2D.CreateLinearGradientBrush(this.Handle, startPoint, endPoint, gradientStops, (uint)gradientStops.Length);
 			return new D2DLinearGradientBrush(handle, gradientStops);
 		}
 
-		public D2DRadialGradientBrush CreateRadialGradientBrush(D2DPoint origin, D2DPoint offset,
-																														FLOAT radiusX, FLOAT radiusY,
-																														D2DGradientStop[] gradientStops)
+		public D2DRadialGradientBrush CreateRadialGradientBrush(D2DPoint origin, D2DPoint offset, FLOAT radiusX, FLOAT radiusY, D2DGradientStop[] gradientStops)
 		{
 			HANDLE handle = D2D.CreateRadialGradientBrush(this.Handle, origin, offset, radiusX, radiusY,
 				gradientStops, (uint)gradientStops.Length);
-
 			return new D2DRadialGradientBrush(handle, gradientStops);
+		}
+		/// <summary> Creates a radial (circular) gradient brush, which starts in a center and then blends outwards.</summary>
+		/// <param name="center_x">The X coordinate of the circle's center.</param>
+		/// <param name="center_y">The Y coordinate of the circle's center.</param>
+		/// <param name="offset_x">The X coordinate of the gradient start. Consider this as a smudge tool that shifts the circle's center, yet the outer circle stays at the same position.</param>
+		/// <param name="offset_y">The Y coordinate of the gradient start.</param>
+		/// <param name="radiusX">Half of the circle's width.</param>
+		/// <param name="radiusY">Half of the circle's height.</param>
+		/// <param name="gradientStops"></param>
+		/// <returns></returns>
+		public D2DRadialGradientBrush CreateRadialGradientBrush(float center_x, float center_y, float offset_x, float offset_y,
+			FLOAT radiusX, FLOAT radiusY, D2DGradientStop[] gradientStops)
+    {
+			return CreateRadialGradientBrush(new D2DPoint(center_x, center_y), new D2DPoint(offset_x, offset_y), radiusX, radiusY, gradientStops);
+		}
+		/// <summary> Creates a radial (circular) gradient brush, which starts in a center and then blends outwards.</summary>
+		/// <param name="center_x">The X coordinate of the circle's center.</param>
+		/// <param name="center_y">The Y coordinate of the circle's center.</param>
+		/// <param name="offset_x">The X coordinate of the gradient start. Consider this as a smudge tool that shifts the circle's center, yet the outer circle stays at the same position.</param>
+		/// <param name="offset_y">The Y coordinate of the gradient start.</param>
+		/// <param name="radiusX">Half of the circle's width.</param>
+		/// <param name="radiusY">Half of the circle's height.</param>
+		/// <param name="gradientStops"></param>
+		/// <returns></returns>
+		public D2DRadialGradientBrush CreateRadialGradientBrush(decimal center_x, decimal center_y, decimal offset_x, decimal offset_y,
+			decimal radiusX, decimal radiusY, D2DGradientStop[] gradientStops)
+		{
+			return CreateRadialGradientBrush(new D2DPoint((float)center_x, (float)center_y),
+				new D2DPoint((float)offset_x, (float)offset_y), (float)radiusX, (float)radiusY, gradientStops);
 		}
 
 		public D2DRectangleGeometry CreateRectangleGeometry(FLOAT width, FLOAT height)
