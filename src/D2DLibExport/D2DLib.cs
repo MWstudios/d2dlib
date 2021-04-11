@@ -252,6 +252,11 @@ namespace unvell.D2DLib
 			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void DrawPolygonWithBrushes(HANDLE ctx, D2DPoint[] points, UINT count,
+			HANDLE outlineBrush, FLOAT strokeWidth, D2DDashStyle dashStyle, HANDLE brushHandler,
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
+
+		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetPathStartPoint(HANDLE ctx, D2DPoint startPoint);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]

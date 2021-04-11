@@ -74,4 +74,7 @@ extern "C"
 	D2DLIB_API void DrawPolygonWithBrush(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 		D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle,
 		D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin);
+	D2DLIB_API void DrawPolygonWithBrushes(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
+		HANDLE strokeBrush, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle,
+		D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin);
 }

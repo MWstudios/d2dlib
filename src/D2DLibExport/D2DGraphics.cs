@@ -206,19 +206,12 @@ namespace unvell.D2DLib
 		{
 			D2D.DrawPolygonWithBrush(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin);
 		}
-		/*
-    [Obsolete("FillPolygon will be removed from later versions. Use DrawPolygon instead")]
-    public void FillPolygon(D2DPoint[] points, D2DColor fillColor)
+		public void DrawPolygon(D2DPoint[] points, D2DBrush fillBrush, D2DBrush outlineBrush, FLOAT strokeWidth, D2DDashStyle dashStyle,
+			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
+			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
 		{
-			this.DrawPolygon(points, D2DColor.Transparent, 0, D2DDashStyle.Solid, fillColor);
+			D2D.DrawPolygonWithBrushes(Handle, points, (uint)points.Length, outlineBrush.Handle, strokeWidth, dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin);
 		}
-
-    [Obsolete("FillPolygon will be removed from later versions. Use DrawPolygon instead")]
-    public void FillPolygon(D2DPoint[] points, D2DBrush brush)
-		{
-			D2D.DrawPolygonWithBrush(this.Handle, points, (uint)points.Length, D2DColor.Transparent, 0, D2DDashStyle.Solid, brush.Handle);
-		}
-		*/
 #if DEBUG
 		public void TestDraw()
 		{
