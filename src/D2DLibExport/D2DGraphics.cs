@@ -405,7 +405,7 @@ namespace unvell.D2DLib
 				DWriteTextAlignment.Center, DWriteParagraphAlignment.Center);
 		}
 
-		public void DrawText(string text, D2DColor color, string fontName, float fontSize, FLOAT x, FLOAT y,
+		public void DrawText(string text, D2DBrush brush, string fontName, float fontSize, FLOAT x, FLOAT y,
 			DWriteTextAlignment halign = DWriteTextAlignment.Leading,
 			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
@@ -413,9 +413,18 @@ namespace unvell.D2DLib
 			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
 			D2DRect rect = new D2DRect(x, y, int.MaxValue, int.MaxValue);
-			D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
+			D2D.DrawBrushString(this.Handle, text, brush.Handle, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
 		}
 
+		public void DrawText(string text, D2DBrush brush, string fontName, float fontSize, D2DRect rect,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading,
+			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
+			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
+			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			D2D.DrawBrushString(this.Handle, text, brush.Handle, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
+		}
 		public void DrawText(string text, D2DColor color, string fontName, float fontSize, D2DRect rect,
 			DWriteTextAlignment halign = DWriteTextAlignment.Leading,
 			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
@@ -423,7 +432,7 @@ namespace unvell.D2DLib
 			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
 			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
-			D2D.DrawText(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
+			D2D.DrawColorString(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch);
 		}
 
 		public D2DSize MeasureText(string text, string fontName, float fontSize, D2DSize placeSize)

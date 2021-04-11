@@ -23,10 +23,40 @@
 */
 
 #include "stdafx.h"
+#include "Brush.h"
 #include "Text.h"
 
-D2DLIB_API void DrawString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
-	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect, DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
+D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color,
+	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
+	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
+	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle, DWRITE_FONT_STRETCH fstretch)
+{
+	RetrieveContext(ctx);
+
+	ID2D1SolidColorBrush* brush = NULL;
+	IDWriteTextFormat* textFormat = NULL;
+
+	HRESULT hr = context->writeFactory->CreateTextFormat(fontName, NULL, fweight, fstyle, fstretch,
+		fontSize, L"", /*locale*/ &textFormat);
+
+	if (SUCCEEDED(hr) && textFormat != NULL)
+	{
+		textFormat->SetTextAlignment(halign);
+		textFormat->SetParagraphAlignment(valign);
+
+		ID2D1Brush* brush = NULL;
+		if (color != NULL) {
+			BrushContext* brushContext = reinterpret_cast<BrushContext*>(color);
+			brush = brushContext->brush;
+			context->renderTarget->DrawText(text, wcslen(text), textFormat, rect, brush);
+		}
+	}
+
+	SafeRelease(&textFormat);
+}
+D2DLIB_API void DrawColorString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
+	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
+	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
 	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle, DWRITE_FONT_STRETCH fstretch)
 {
 	RetrieveContext(ctx);
@@ -43,8 +73,8 @@ D2DLIB_API void DrawString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
 		textFormat->SetParagraphAlignment(valign);
 
 		// Create a solid color brush.
-		hr = (context->renderTarget)->CreateSolidColorBrush(color, &brush);
 
+		hr = (context->renderTarget)->CreateSolidColorBrush(color, &brush);
 		if (SUCCEEDED(hr) && brush != NULL) {
 			context->renderTarget->DrawText(text, wcslen(text), textFormat, rect, brush);
 		}

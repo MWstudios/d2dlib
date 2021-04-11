@@ -195,9 +195,20 @@ namespace unvell.D2DLib
 
 		#region Text
 
-		[DllImport(DLL_NAME, EntryPoint = "DrawString", CharSet = CharSet.Unicode,
+		[DllImport(DLL_NAME, EntryPoint = "DrawBrushString", CharSet = CharSet.Unicode,
 			CallingConvention = CallingConvention.Cdecl)]
-		public static extern void DrawText([In] HANDLE context, [In] string text, [In] D2DColor color,
+		public static extern void DrawBrushString([In] HANDLE context, [In] string text, [In] HANDLE brush,
+			[In] string fontName, [In] FLOAT fontSize, [In] ref D2DRect rect,
+			[In] DWriteTextAlignment halign = DWriteTextAlignment.Leading,
+			[In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			[In] DWriteFontWeight fweight = DWriteFontWeight.Normal,
+			[In] DWriteFontStyle fstyle = DWriteFontStyle.Normal,
+			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal
+			);
+
+		[DllImport(DLL_NAME, EntryPoint = "DrawColorString", CharSet = CharSet.Unicode,
+			CallingConvention = CallingConvention.Cdecl)]
+		public static extern void DrawColorString([In] HANDLE context, [In] string text, [In] D2DColor color,
 			[In] string fontName, [In] FLOAT fontSize, [In] ref D2DRect rect,
 			[In] DWriteTextAlignment halign = DWriteTextAlignment.Leading,
 			[In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,

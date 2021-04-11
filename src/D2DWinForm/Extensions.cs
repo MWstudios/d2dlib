@@ -54,39 +54,75 @@ namespace unvell.D2DLib.WinForm
 			}
 		}
 
-		public static void DrawText(this D2DGraphics g, string text, D2DColor color, float x, float y,
-			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
-			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		public static void DrawText(this D2DGraphics g, string text, D2DBrush brush, float x, float y,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
 			using (var font = new Font("Arial", 8.25f))
 			{
-				g.DrawText(text, color, font, x, y, fontWeight, fontStyle, fontStretch);
+				g.DrawText(text, brush, font, x, y, halign, valign, fontWeight, fontStyle, fontStretch);
 			}
 		}
 
-		public static void DrawText(this D2DGraphics g, string text, D2DColor color, Font font, float x, float y,
-			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
-			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		public static void DrawText(this D2DGraphics g, string text, D2DBrush brush, Font font, float x, float y,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
 			var rect = new D2DRect(x, y, int.MaxValue, int.MaxValue);
-			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
+			g.DrawText(text, brush, font.Name, font.Size * 96f / 72f, rect, halign, valign, fontWeight, fontStyle, fontStretch);
+		}
+
+		public static void DrawText(this D2DGraphics g, string text, D2DBrush brush, Font font, Point location,
+			DWriteTextAlignment halign=DWriteTextAlignment.Leading, DWriteParagraphAlignment valign=DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			var rect = new D2DRect(location.X, location.Y, int.MaxValue, int.MaxValue);
+			g.DrawText(text, brush, font.Name, font.Size * 96f / 72f, rect, halign, valign, fontWeight, fontStyle, fontStretch);
+		}
+		public static void DrawText(this D2DGraphics g, string text, D2DBrush brush, Font font, D2DRect rect,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			g.DrawText(text, brush, font.Name, font.Size * 96f / 72f, rect, halign, valign, fontWeight, fontStyle, fontStretch);
+		}
+		public static void DrawText(this D2DGraphics g, string text, D2DBrush brush, Font font, PointF location,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			var rect = new D2DRect(location.X, location.Y, int.MaxValue, int.MaxValue);
+			g.DrawText(text, brush, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
+		}
+		public static void DrawText(this D2DGraphics g, string text, D2DColor color, float x, float y,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			using (var font = new Font("Arial", 8.25f))
+			{
+				g.DrawText(text, color, font, x, y, halign, valign, fontWeight, fontStyle, fontStretch);
+			}
+		}
+		public static void DrawText(this D2DGraphics g, string text, D2DColor color, Font font, float x, float y,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			var rect = new D2DRect(x, y, int.MaxValue, int.MaxValue);
+			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, halign, valign, fontWeight, fontStyle, fontStretch);
 		}
 
 		public static void DrawText(this D2DGraphics g, string text, D2DColor color, Font font, Point location,
-			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
-			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
 			var rect = new D2DRect(location.X, location.Y, int.MaxValue, int.MaxValue);
-			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
+			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, halign, valign, fontWeight, fontStyle, fontStretch);
 		}
-
+		public static void DrawText(this D2DGraphics g, string text, D2DColor color, Font font, D2DRect rect,
+			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+		{
+			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, halign, valign, fontWeight, fontStyle, fontStretch);
+		}
 		public static void DrawText(this D2DGraphics g, string text, D2DColor color, Font font, PointF location,
-			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
-			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
+			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal, DWriteFontStretch fontStretch = DWriteFontStretch.Normal)
 		{
 			var rect = new D2DRect(location.X, location.Y, int.MaxValue, int.MaxValue);
 			g.DrawText(text, color, font.Name, font.Size * 96f / 72f, rect, fontWeight: fontWeight, fontStyle: fontStyle, fontStretch: fontStretch);
