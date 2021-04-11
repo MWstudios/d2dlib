@@ -407,6 +407,17 @@ namespace unvell.D2DLib
 	{
 		Undefined, UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
 	}
+	public enum DWriteWordWrapping
+  {
+		/// <summary>Indicates that words are broken across lines to avoid text overflowing the layout box.</summary>
+		Wrap, None,
+		/// <summary> Words are broken across lines to avoid text overflowing the layout box.<br></br>Emergency wrapping occurs if the word is larger than the maximum width. </summary>
+		EmergencyWrap,
+		/// <summary> When emergency wrapping, only wrap whole words, never breaking words when the layout width is too small for even a single word. </summary>
+		WrapWholeWords,
+		/// <summary>Wrap between any valid character clusters.</summary>
+		WrapCharacters
+	}
 	public enum DWriteFontStyle
 	{
 		Normal,

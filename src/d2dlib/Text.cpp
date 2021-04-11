@@ -26,10 +26,9 @@
 #include "Brush.h"
 #include "Text.h"
 
-D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color,
-	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
-	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
-	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle, DWRITE_FONT_STRETCH fstretch)
+D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color, LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
+	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign, DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle,
+	DWRITE_FONT_STRETCH fstretch, DWRITE_WORD_WRAPPING fwrap)
 {
 	RetrieveContext(ctx);
 
@@ -43,7 +42,7 @@ D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color,
 	{
 		textFormat->SetTextAlignment(halign);
 		textFormat->SetParagraphAlignment(valign);
-
+		textFormat->SetWordWrapping(fwrap);
 		ID2D1Brush* brush = NULL;
 		if (color != NULL) {
 			BrushContext* brushContext = reinterpret_cast<BrushContext*>(color);
@@ -57,7 +56,8 @@ D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color,
 D2DLIB_API void DrawColorString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
 	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
 	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
-	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle, DWRITE_FONT_STRETCH fstretch)
+	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle,
+	DWRITE_FONT_STRETCH fstretch, DWRITE_WORD_WRAPPING fwrap)
 {
 	RetrieveContext(ctx);
 
@@ -71,7 +71,7 @@ D2DLIB_API void DrawColorString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
 	{
 		textFormat->SetTextAlignment(halign);
 		textFormat->SetParagraphAlignment(valign);
-
+		textFormat->SetWordWrapping(fwrap);
 		// Create a solid color brush.
 
 		hr = (context->renderTarget)->CreateSolidColorBrush(color, &brush);

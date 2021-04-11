@@ -101,6 +101,18 @@
         <member name="T:unvell.D2DLib.DWriteFontWeight">
             <summary> Specifies a member of the font family (such as Arial Black). </summary>
         </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.Wrap">
+            <summary>Indicates that words are broken across lines to avoid text overflowing the layout box.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.EmergencyWrap">
+            <summary> Words are broken across lines to avoid text overflowing the layout box.<br></br>Emergency wrapping occurs if the word is larger than the maximum width. </summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.WrapWholeWords">
+            <summary> When emergency wrapping, only wrap whole words, never breaking words when the layout width is too small for even a single word. </summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.WrapCharacters">
+            <summary>Wrap between any valid character clusters.</summary>
+        </member>
         <member name="F:unvell.D2DLib.DWriteFontStyle.Oblique">
             <summary> Force shears the text without using the italic variation.</summary>
         </member>
