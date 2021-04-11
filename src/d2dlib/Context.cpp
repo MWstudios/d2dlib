@@ -360,8 +360,9 @@ void ReleaseObject(HANDLE handle)
 	SafeRelease(&object);
 }
 
-HBITMAP ContextToHbitmap(HANDLE ctx)
+HBITMAP ContextToHbitmap(HANDLE ctx) //non-functional
 {
 	RetrieveContext(ctx);
-	return CreateCompatibleBitmap(GetDC(context->renderTarget->GetHwnd()), context->renderTarget->GetSize().width, context->renderTarget->GetSize().height);
+	return CreateCompatibleBitmap(CreateCompatibleDC(GetDC(context->renderTarget->GetHwnd())),
+		context->renderTarget->GetSize().width, context->renderTarget->GetSize().height);
 }
