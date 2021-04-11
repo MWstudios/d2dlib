@@ -4,30 +4,56 @@
         <name>d2dlibexport</name>
     </assembly>
     <members>
+        <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,unvell.D2DLib.D2DGradientStop[])">
+            <summary> Creates a radial (circular) gradient brush, which starts in a center and then blends outwards.</summary>
+            <param name="center_x">The X coordinate of the circle's center.</param>
+            <param name="center_y">The Y coordinate of the circle's center.</param>
+            <param name="offset_x">The X coordinate of the gradient start. Consider this as a smudge tool that shifts the circle's center, yet the outer circle stays at the same position.</param>
+            <param name="offset_y">The Y coordinate of the gradient start.</param>
+            <param name="radiusX">Half of the circle's width.</param>
+            <param name="radiusY">Half of the circle's height.</param>
+            <param name="gradientStops"></param>
+            <returns></returns>
+        </member>
+        <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,unvell.D2DLib.D2DGradientStop[])">
+            <summary> Creates a radial (circular) gradient brush, which starts in a center and then blends outwards.</summary>
+            <param name="center_x">The X coordinate of the circle's center.</param>
+            <param name="center_y">The Y coordinate of the circle's center.</param>
+            <param name="offset_x">The X coordinate of the gradient start. Consider this as a smudge tool that shifts the circle's center, yet the outer circle stays at the same position.</param>
+            <param name="offset_y">The Y coordinate of the gradient start.</param>
+            <param name="radiusX">Half of the circle's width.</param>
+            <param name="radiusY">Half of the circle's height.</param>
+            <param name="gradientStops"></param>
+            <returns></returns>
+        </member>
         <member name="T:unvell.D2DLib.D2DCapStyle">
             <summary>
             From <c>D2D1_CAP_STYLE</c>.
             </summary>
         </member>
         <member name="F:unvell.D2DLib.D2DCapStyle.Flat">
-            <summary>
-            Flat line cap.
-            </summary>
+            <summary> Flat line cap. </summary>
         </member>
         <member name="F:unvell.D2DLib.D2DCapStyle.Square">
-            <summary>
-            Square line cap.
-            </summary>
+            <summary> Square line cap. </summary>
         </member>
         <member name="F:unvell.D2DLib.D2DCapStyle.Round">
-            <summary>
-            Round line cap.
-            </summary>
+            <summary> Round line cap. </summary>
         </member>
         <member name="F:unvell.D2DLib.D2DCapStyle.Triangle">
-            <summary>
-            Triangle line cap.
-            </summary>
+            <summary> Triangle line cap. </summary>
+        </member>
+        <member name="F:unvell.D2DLib.D2DLineJoinStyle.Miter">
+            <summary> Pointy vertices.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.D2DLineJoinStyle.Bevel">
+            <summary> Beveled vertices.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.D2DLineJoinStyle.Round">
+            <summary> Rounded vertices.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.D2DLineJoinStyle.MitelOrBevel">
+            <summary> Beveled vertices, but pointy at lower angles.</summary>
         </member>
         <member name="F:unvell.D2DLib.D2DTextAntialiasMode.ClearType">
             <summary>Creates red and blue artifacts around the letters to make them look smooth.</summary>
