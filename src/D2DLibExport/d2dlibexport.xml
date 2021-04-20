@@ -13,6 +13,8 @@
             <param name="radiusX">Half of the circle's width.</param>
             <param name="radiusY">Half of the circle's height.</param>
             <param name="gradientStops"></param>
+            <param name="extendMode">How will the gradient look like beyond its specified boundaries.</param>
+            <param name="gamma"></param>
             <returns></returns>
         </member>
         <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,unvell.D2DLib.D2DGradientStop[],unvell.D2DLib.D2DGradientExtendMode,unvell.D2DLib.D2DGradientGamma)">
@@ -24,6 +26,8 @@
             <param name="radiusX">Half of the circle's width.</param>
             <param name="radiusY">Half of the circle's height.</param>
             <param name="gradientStops"></param>
+            <param name="extendMode">How will the gradient look like beyond its specified boundaries.</param>
+            <param name="gamma"></param>
             <returns></returns>
         </member>
         <member name="T:unvell.D2DLib.D2DCapStyle">

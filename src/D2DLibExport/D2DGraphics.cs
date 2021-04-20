@@ -206,7 +206,7 @@ namespace unvell.D2DLib
 		{
 			D2D.DrawPolygonWithBrush(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin);
 		}
-		public void DrawPolygon(D2DPoint[] points, D2DBrush fillBrush, D2DBrush outlineBrush, FLOAT strokeWidth, D2DDashStyle dashStyle,
+		public void DrawPolygon(D2DPoint[] points, D2DBrush fillBrush, D2DBrush outlineBrush, FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
 			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
 		{
