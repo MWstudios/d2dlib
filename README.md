@@ -36,7 +36,7 @@ There are another two parameters, DWriteWordWrapping and DWriteTextOptions, that
 
 `DWriteTextOptions` specifies how to render the parts of text that are outside of the rectangle. `None` renders them, `Clip` doesn't.
 ```csharp
-g.DrawText("Text gradient", brush, new Font("Arial", 50),
+g.DrawText("Text gradient being clipped", brush, new Font("Arial", 50),
     new D2DRect(0, 0, 300, 250), //rectangle instead of coordinates
     DWriteTextAlignment.Leading, DWriteParagraphAlignment.Near, DWriteFontWeight.Black, DWriteFontStyle.Italic, DWriteFontStretch.Normal,
     DWriteWordWrapping.EmergencyWrap, //wraps indiviudal letters
