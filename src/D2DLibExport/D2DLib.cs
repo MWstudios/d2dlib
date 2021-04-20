@@ -174,12 +174,16 @@ namespace unvell.D2DLib
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawRoundedRect(HANDLE ctx, ref D2DRoundedRect roundedRect,
-			D2DColor strokeColor, D2DColor fillColor,
-			FLOAT strokeWidth = 1, D2DDashStyle strokeStyle = D2DDashStyle.Solid);
+			D2DColor strokeColor, D2DColor fillColor, FLOAT strokeWidth, D2DDashStyle strokeStyle,
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawRoundedRectWithBrush(HANDLE ctx, ref D2DRoundedRect roundedRect,
 			HANDLE strokePen, HANDLE fillBrush, float strokeWidth = 1);
+		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void DrawRoundedRectWithBrushes(HANDLE ctx, ref D2DRoundedRect roundedRect,
+			HANDLE strokeBrush, HANDLE fillBrush, float strokeWidth, D2DDashStyle strokeStyle,
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawEllipse(HANDLE context, ref D2DEllipse rect, D2DColor color,
@@ -201,8 +205,8 @@ namespace unvell.D2DLib
 			[In] string fontName, [In] FLOAT fontSize, [In] ref D2DRect rect,
 			[In] DWriteTextAlignment halign = DWriteTextAlignment.Leading, [In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			[In] DWriteFontWeight fweight = DWriteFontWeight.Normal, [In] DWriteFontStyle fstyle = DWriteFontStyle.Normal,
-			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal, [In] DWriteWordWrapping textWrap = DWriteWordWrapping.None
-			);
+			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal, [In] DWriteWordWrapping textWrap = DWriteWordWrapping.None,
+			[In] DWriteTextOptions textOptions = DWriteTextOptions.None);
 
 		[DllImport(DLL_NAME, EntryPoint = "DrawColorString", CharSet = CharSet.Unicode,
 			CallingConvention = CallingConvention.Cdecl)]
@@ -210,8 +214,8 @@ namespace unvell.D2DLib
 			[In] string fontName, [In] FLOAT fontSize, [In] ref D2DRect rect,
 			[In] DWriteTextAlignment halign = DWriteTextAlignment.Leading, [In] DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			[In] DWriteFontWeight fweight = DWriteFontWeight.Normal, [In] DWriteFontStyle fstyle = DWriteFontStyle.Normal,
-			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal, [In] DWriteWordWrapping textWrap = DWriteWordWrapping.None
-			);
+			[In] DWriteFontStretch fstretch = DWriteFontStretch.Normal, [In] DWriteWordWrapping textWrap = DWriteWordWrapping.None,
+			[In] DWriteTextOptions textOptions = DWriteTextOptions.None);
 
 		[DllImport(DLL_NAME, EntryPoint = "MeasureText", CharSet = CharSet.Unicode,
 			CallingConvention = CallingConvention.Cdecl)]
@@ -334,12 +338,11 @@ namespace unvell.D2DLib
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern HANDLE CreateLinearGradientBrush(HANDLE ctx, D2DPoint startPoint, D2DPoint endPoint,
-																											D2DGradientStop[] gradientStops, UINT gradientStopCount);
+			D2DGradientStop[] gradientStops, UINT gradientStopCount, D2DGradientExtendMode gradExtend, D2DGradientGamma gradGamma);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern HANDLE CreateRadialGradientBrush(HANDLE ctx, D2DPoint origin, D2DPoint offset,
-																													FLOAT radiusX, FLOAT radiusY, D2DGradientStop[] gradientStops,
-																													UINT gradientStopCount);
+			FLOAT radiusX, FLOAT radiusY, D2DGradientStop[] gradientStops, UINT gradientStopCount, D2DGradientExtendMode gradExtend, D2DGradientGamma gradGamma);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ReleaseBrush(HANDLE brushCtx);

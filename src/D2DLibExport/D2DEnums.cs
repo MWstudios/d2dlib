@@ -398,34 +398,6 @@ namespace unvell.D2DLib
 		/// </summary>
 		Center
 	};
-	/// <summary> Specifies a member of the font family (such as Arial Black). </summary>
-	public enum DWriteFontWeight
-	{
-		Thin = 100, ExtraLight = 200, Light = 300, SemiLight = 350, Normal = 400, Medium = 500, SemiBold = 600, Bold = 700, ExtraBold = 800, Black = 900, ExtraBlack = 950
-	}
-	public enum DWriteFontStretch
-	{
-		Undefined, UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
-	}
-	public enum DWriteWordWrapping
-  {
-		/// <summary>Indicates that words are broken across lines to avoid text overflowing the layout box.</summary>
-		Wrap, None,
-		/// <summary> Words are broken across lines to avoid text overflowing the layout box.<br></br>Emergency wrapping occurs if the word is larger than the maximum width. </summary>
-		EmergencyWrap,
-		/// <summary> When emergency wrapping, only wrap whole words, never breaking words when the layout width is too small for even a single word. </summary>
-		WrapWholeWords,
-		/// <summary>Wrap between any valid character clusters.</summary>
-		WrapCharacters
-	}
-	public enum DWriteFontStyle
-	{
-		Normal,
-		/// <summary> Force shears the text without using the italic variation.</summary>
-		Oblique,
-		/// <summary> Uses the italic member of the font family, just as it was designed.</summary>
-		Italic
-	}
 	/// <summary>
 	/// Alignment of paragraph text along the flow direction axis relative to the
 	/// flow's beginning and ending edge of the layout box.
@@ -447,7 +419,40 @@ namespace unvell.D2DLib
 		/// </summary>
 		Center
 	};
-
+	/// <summary> Specifies a member of the font family (such as Arial Black). </summary>
+	public enum DWriteFontWeight
+	{
+		Thin = 100, ExtraLight = 200, Light = 300, SemiLight = 350, Normal = 400, Medium = 500, SemiBold = 600, Bold = 700, ExtraBold = 800, Black = 900, ExtraBlack = 950
+	}
+	public enum DWriteFontStretch
+	{ 
+		Undefined, UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
+	}
+	public enum DWriteWordWrapping
+  {
+		/// <summary>Indicates that words are broken across lines to avoid text overflowing the layout box.</summary>
+		Wrap, None,
+		/// <summary> Words are broken across lines to avoid text overflowing the layout box.<br></br>Emergency wrapping occurs if the word is larger than the maximum width. </summary>
+		EmergencyWrap,
+		/// <summary> When emergency wrapping, only wrap whole words, never breaking words when the layout width is too small for even a single word. </summary>
+		WrapWholeWords,
+		/// <summary>Wrap between any valid character clusters.</summary>
+		WrapCharacters
+	}
+	public enum DWriteFontStyle
+	{
+		Normal,
+		/// <summary> Force shears the text without using the italic variation.</summary>
+		Oblique,
+		/// <summary> Uses the italic member of the font family, just as it was designed.</summary>
+		Italic
+	}
+	[Flags] public enum DWriteTextOptions 
+	{
+		None, NoSnap, Clip, ColorFont = 4, SnapBitmaps = 8
+	}
+	public enum D2DGradientExtendMode { None, Wrap, Mirror }
+	public enum D2DGradientGamma { TwoPointTwo, One }
 	public enum LayerOptions
 	{
 		None = 0x00000000,

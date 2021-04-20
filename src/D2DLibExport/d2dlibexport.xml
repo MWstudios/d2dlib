@@ -4,7 +4,7 @@
         <name>d2dlibexport</name>
     </assembly>
     <members>
-        <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,unvell.D2DLib.D2DGradientStop[])">
+        <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,unvell.D2DLib.D2DGradientStop[],unvell.D2DLib.D2DGradientExtendMode,unvell.D2DLib.D2DGradientGamma)">
             <summary> Creates a radial (circular) gradient brush, which starts in a center and then blends outwards.</summary>
             <param name="center_x">The X coordinate of the circle's center.</param>
             <param name="center_y">The Y coordinate of the circle's center.</param>
@@ -15,7 +15,7 @@
             <param name="gradientStops"></param>
             <returns></returns>
         </member>
-        <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,unvell.D2DLib.D2DGradientStop[])">
+        <member name="M:unvell.D2DLib.D2DDevice.CreateRadialGradientBrush(System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Decimal,unvell.D2DLib.D2DGradientStop[],unvell.D2DLib.D2DGradientExtendMode,unvell.D2DLib.D2DGradientGamma)">
             <summary> Creates a radial (circular) gradient brush, which starts in a center and then blends outwards.</summary>
             <param name="center_x">The X coordinate of the circle's center.</param>
             <param name="center_y">The Y coordinate of the circle's center.</param>
@@ -98,27 +98,6 @@
             The center of the paragraph text is aligned to the center of the layout box.
             </summary>
         </member>
-        <member name="T:unvell.D2DLib.DWriteFontWeight">
-            <summary> Specifies a member of the font family (such as Arial Black). </summary>
-        </member>
-        <member name="F:unvell.D2DLib.DWriteWordWrapping.Wrap">
-            <summary>Indicates that words are broken across lines to avoid text overflowing the layout box.</summary>
-        </member>
-        <member name="F:unvell.D2DLib.DWriteWordWrapping.EmergencyWrap">
-            <summary> Words are broken across lines to avoid text overflowing the layout box.<br></br>Emergency wrapping occurs if the word is larger than the maximum width. </summary>
-        </member>
-        <member name="F:unvell.D2DLib.DWriteWordWrapping.WrapWholeWords">
-            <summary> When emergency wrapping, only wrap whole words, never breaking words when the layout width is too small for even a single word. </summary>
-        </member>
-        <member name="F:unvell.D2DLib.DWriteWordWrapping.WrapCharacters">
-            <summary>Wrap between any valid character clusters.</summary>
-        </member>
-        <member name="F:unvell.D2DLib.DWriteFontStyle.Oblique">
-            <summary> Force shears the text without using the italic variation.</summary>
-        </member>
-        <member name="F:unvell.D2DLib.DWriteFontStyle.Italic">
-            <summary> Uses the italic member of the font family, just as it was designed.</summary>
-        </member>
         <member name="T:unvell.D2DLib.DWriteParagraphAlignment">
             <summary>
             Alignment of paragraph text along the flow direction axis relative to the
@@ -139,6 +118,27 @@
             <summary>
             The center of the paragraph is aligned to the center of the flow of the layout box.
             </summary>
+        </member>
+        <member name="T:unvell.D2DLib.DWriteFontWeight">
+            <summary> Specifies a member of the font family (such as Arial Black). </summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.Wrap">
+            <summary>Indicates that words are broken across lines to avoid text overflowing the layout box.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.EmergencyWrap">
+            <summary> Words are broken across lines to avoid text overflowing the layout box.<br></br>Emergency wrapping occurs if the word is larger than the maximum width. </summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.WrapWholeWords">
+            <summary> When emergency wrapping, only wrap whole words, never breaking words when the layout width is too small for even a single word. </summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteWordWrapping.WrapCharacters">
+            <summary>Wrap between any valid character clusters.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteFontStyle.Oblique">
+            <summary> Force shears the text without using the italic variation.</summary>
+        </member>
+        <member name="F:unvell.D2DLib.DWriteFontStyle.Italic">
+            <summary> Uses the italic member of the font family, just as it was designed.</summary>
         </member>
         <member name="F:unvell.D2DLib.LayerOptions.InitializeForClearType">
             <summary>

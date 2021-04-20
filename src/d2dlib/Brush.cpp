@@ -66,7 +66,7 @@ void SetSolidColorBrushColor(HANDLE brushHandle, D2D1_COLOR_F color)
 }
 
 HANDLE CreateLinearGradientBrush(HANDLE ctx, D2D1_POINT_2F startPoint, D2D1_POINT_2F endPoint,
-	D2D1_GRADIENT_STOP* gradientStops, UINT gradientStopCount)
+	D2D1_GRADIENT_STOP* gradientStops, UINT gradientStopCount, D2D1_EXTEND_MODE gradExtend, D2D1_GAMMA gradGamma)
 {
 	RetrieveContext(ctx);
 	ID2D1RenderTarget* renderTarget = context->renderTarget;
@@ -74,7 +74,7 @@ HANDLE CreateLinearGradientBrush(HANDLE ctx, D2D1_POINT_2F startPoint, D2D1_POIN
 
 	ID2D1GradientStopCollection* gradientStopCollection = NULL;
 
-	hr = renderTarget->CreateGradientStopCollection(gradientStops, gradientStopCount, &gradientStopCollection);
+	hr = renderTarget->CreateGradientStopCollection(gradientStops, gradientStopCount, gradGamma, gradExtend, &gradientStopCollection);
 
 	ID2D1LinearGradientBrush* brush = NULL;
 	BrushContext* brushContext = NULL;
@@ -97,22 +97,22 @@ HANDLE CreateLinearGradientBrush(HANDLE ctx, D2D1_POINT_2F startPoint, D2D1_POIN
 }
 
 HANDLE CreateRadialGradientBrush(HANDLE ctx, D2D1_POINT_2F origin, D2D1_POINT_2F offset,
-																 FLOAT radiusX, FLOAT radiusY, D2D1_GRADIENT_STOP* gradientStops, 
-																 UINT gradientStopCount)
+	FLOAT radiusX, FLOAT radiusY, D2D1_GRADIENT_STOP* gradientStops,
+	UINT gradientStopCount, D2D1_EXTEND_MODE gradExtend, D2D1_GAMMA gradGamma)
 {
 	RetrieveContext(ctx);
 	ID2D1RenderTarget* renderTarget = context->renderTarget;
 	HRESULT hr;
 
-	ID2D1GradientStopCollection *gradientStopCollection = NULL;
+	ID2D1GradientStopCollection* gradientStopCollection = NULL;
 
-  hr = renderTarget->CreateGradientStopCollection(
-		gradientStops, gradientStopCount, &gradientStopCollection);
-	
+	hr = renderTarget->CreateGradientStopCollection(
+		gradientStops, gradientStopCount, gradGamma, gradExtend, &gradientStopCollection);
+
 	ID2D1RadialGradientBrush* brush = NULL;
 	BrushContext* brushContext = NULL;
 
-	if (SUCCEEDED(hr)) 
+	if (SUCCEEDED(hr))
 	{
 		hr = renderTarget->CreateRadialGradientBrush(D2D1::RadialGradientBrushProperties(
 			origin, offset, radiusX, radiusY), gradientStopCollection, &brush);
