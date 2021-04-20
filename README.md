@@ -1,5 +1,5 @@
 # d2dlib Extended
-This fork adds extended support for various Direct2D customisations that were impossible (or avoided for some reason) in the original branch.
+This fork adds extended support for various Direct2D customisations that were impossible (or avoided for some reason) in the original branch. The biggest feature is applying gradient brushes to places where they couldn't be before.
 # What's new in this extension?
 ## Brushes
 New options "extendMode" and "gamma" allow you to change the wrapping beyond the gradient's borders and gamma correction (but that's rarely needed).
