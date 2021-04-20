@@ -48,10 +48,18 @@ extern "C"
 	D2DLIB_API void FillRectangleWithBrush(HANDLE ctx, D2D1_RECT_F* rect, HANDLE brushHandle);
 
 	D2DLIB_API void DrawRoundedRect(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect, D2D1_COLOR_F strokeColor, D2D1_COLOR_F fillColor,
-		FLOAT strokeWidth = 1, D2D1_DASH_STYLE strokeStyle = D2D1_DASH_STYLE::D2D1_DASH_STYLE_SOLID);
+		FLOAT strokeWidth = 1, D2D1_DASH_STYLE strokeStyle = D2D1_DASH_STYLE::D2D1_DASH_STYLE_SOLID,
+		D2D1_CAP_STYLE startCap = D2D1_CAP_STYLE_FLAT, D2D1_CAP_STYLE endCap = D2D1_CAP_STYLE_FLAT,
+		D2D1_CAP_STYLE gapCap = D2D1_CAP_STYLE_ROUND, D2D1_LINE_JOIN lineJoin = D2D1_LINE_JOIN_MITER);
 
 	D2DLIB_API void DrawRoundedRectWithBrush(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect,
 		HANDLE strokePen, HANDLE fillBrush, float strokeWidth = 1);
+
+	D2DLIB_API void DrawRoundedRectWithBrushes(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect,
+		HANDLE strokeBrush, HANDLE fillBrush, float strokeWidth,
+		D2D1_DASH_STYLE dashStyle = D2D1_DASH_STYLE::D2D1_DASH_STYLE_SOLID,
+		D2D1_CAP_STYLE startCap = D2D1_CAP_STYLE_FLAT, D2D1_CAP_STYLE endCap = D2D1_CAP_STYLE_FLAT,
+		D2D1_CAP_STYLE gapCap = D2D1_CAP_STYLE_ROUND, D2D1_LINE_JOIN lineJoin = D2D1_LINE_JOIN_MITER);
 
 	D2DLIB_API void DrawEllipse(HANDLE ctx, D2D1_ELLIPSE* ellipse, D2D1_COLOR_F color,
 		FLOAT width = 1, D2D1_DASH_STYLE dashStyle = D2D1_DASH_STYLE::D2D1_DASH_STYLE_SOLID);

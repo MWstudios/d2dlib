@@ -345,15 +345,30 @@ namespace unvell.D2DLib
 			D2D.FillRectangle(this.Handle, ref rect, color);
 		}
 
+		public void FillRectangle(float x, float y, float width, float height, D2DBrush brush)
+		{
+			var rect = new D2DRect(x, y, width, height);
+			D2D.FillRectangleWithBrush(this.Handle, ref rect, brush.Handle);
+		}
+
 		public void FillRectangle(D2DRect rect, D2DBrush brush)
 		{
 			D2D.FillRectangleWithBrush(this.Handle, ref rect, brush.Handle);
 		}
 
-		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DColor strokeColor, D2DColor fillColor, 
-			FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid)
+		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DColor strokeColor, D2DColor fillColor,
+			FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
+			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
 		{
-			D2D.DrawRoundedRect(this.Handle, ref roundedRect, strokeColor, fillColor, strokeWidth, dashStyle);
+			D2D.DrawRoundedRect(this.Handle, ref roundedRect, strokeColor, fillColor, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+		}
+		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DBrush strokeBrush, D2DBrush fillBrush,
+			FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
+			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+		{
+			D2D.DrawRoundedRectWithBrushes(this.Handle, ref roundedRect, strokeBrush.Handle, fillBrush.Handle, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
 		}
 
 		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DPen strokePen, D2DBrush fillBrush, FLOAT strokeWidth = 1)
@@ -403,25 +418,28 @@ namespace unvell.D2DLib
 			DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			DWriteFontWeight fontWeight = DWriteFontWeight.Normal,
 			DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal, DWriteWordWrapping textWrap = DWriteWordWrapping.None)
+			DWriteFontStretch fontStretch = DWriteFontStretch.Normal, DWriteWordWrapping textWrap = DWriteWordWrapping.None,
+			DWriteTextOptions textOptions = DWriteTextOptions.None)
 		{
 			D2DRect rect = new D2DRect(x, y, int.MaxValue, int.MaxValue);
-			D2D.DrawBrushString(this.Handle, text, brush.Handle, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch, textWrap);
+			D2D.DrawBrushString(this.Handle, text, brush.Handle, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch, textWrap, textOptions);
 		}
 
 		public void DrawText(string text, D2DBrush brush, string fontName, float fontSize, D2DRect rect,
 			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal, DWriteWordWrapping textWrap = DWriteWordWrapping.None)
+			DWriteFontStretch fontStretch = DWriteFontStretch.Normal, DWriteWordWrapping textWrap = DWriteWordWrapping.None,
+			DWriteTextOptions textOptions = DWriteTextOptions.None)
 		{
-			D2D.DrawBrushString(this.Handle, text, brush.Handle, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch, textWrap);
+			D2D.DrawBrushString(this.Handle, text, brush.Handle, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch, textWrap, textOptions);
 		}
 		public void DrawText(string text, D2DColor color, string fontName, float fontSize, D2DRect rect,
 			DWriteTextAlignment halign = DWriteTextAlignment.Leading, DWriteParagraphAlignment valign = DWriteParagraphAlignment.Near,
 			DWriteFontWeight fontWeight = DWriteFontWeight.Normal, DWriteFontStyle fontStyle = DWriteFontStyle.Normal,
-			DWriteFontStretch fontStretch = DWriteFontStretch.Normal, DWriteWordWrapping textWrap = DWriteWordWrapping.None)
+			DWriteFontStretch fontStretch = DWriteFontStretch.Normal, DWriteWordWrapping textWrap = DWriteWordWrapping.None,
+			DWriteTextOptions textOptions = DWriteTextOptions.None)
 		{
-			D2D.DrawColorString(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch, textWrap);
+			D2D.DrawColorString(this.Handle, text, color, fontName, fontSize, ref rect, halign, valign, fontWeight, fontStyle, fontStretch, textWrap, textOptions);
 		}
 
 		public D2DSize MeasureText(string text, string fontName, float fontSize, D2DSize placeSize)

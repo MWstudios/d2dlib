@@ -225,7 +225,8 @@ void FillRectangleWithBrush(HANDLE ctx, D2D1_RECT_F* rect, HANDLE brushHandle)
 }
 
 D2DLIB_API void DrawRoundedRect(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect, D2D1_COLOR_F strokeColor,
-	D2D1_COLOR_F fillColor, FLOAT strokeWidth, D2D1_DASH_STYLE strokeStyle)
+	D2D1_COLOR_F fillColor, FLOAT strokeWidth, D2D1_DASH_STYLE strokeStyle,
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
 {
 	RetrieveContext(ctx);
 
@@ -238,16 +239,11 @@ D2DLIB_API void DrawRoundedRect(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect, D2D1
 
 		if (strokeBrush != NULL) {
 
-			if (strokeStyle != D2D1_DASH_STYLE_SOLID) {
 				context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
-					D2D1_CAP_STYLE_FLAT,
-					D2D1_CAP_STYLE_FLAT,
-					D2D1_CAP_STYLE_ROUND,
-					D2D1_LINE_JOIN_MITER,
+					startCap, endCap, gapCap, lineJoin,
 					10.0f,
 					strokeStyle,
 					0.0f), NULL, 0, &strokeStyleObj);
-			}
 
 			context->renderTarget->DrawRoundedRectangle(roundedRect, strokeBrush, strokeWidth, strokeStyleObj);
 		}
@@ -277,6 +273,27 @@ D2DLIB_API void DrawRoundedRectWithBrush(HANDLE ctx, D2D1_ROUNDED_RECT* roundedR
 
 	if (pen != NULL) {
 		context->renderTarget->DrawRoundedRectangle(roundedRect, pen->brush, strokeWidth, pen->strokeStyle);
+	}
+
+	if (brush != NULL) {
+		context->renderTarget->FillRoundedRectangle(roundedRect, brush);
+	}
+}
+
+D2DLIB_API void DrawRoundedRectWithBrushes(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect,
+	HANDLE strokeBrush, HANDLE fillBrush, float strokeWidth, D2D1_DASH_STYLE dashStyle,
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+{
+	RetrieveContext(ctx);
+
+	ID2D1Brush* brush = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(fillBrush)->brush);
+	ID2D1Brush* brush2 = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(strokeBrush)->brush);
+
+	if (brush2 != NULL) {
+		ID2D1StrokeStyle* strokeStyleObj = NULL;
+		context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties( startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyleObj);
+		context->renderTarget->DrawRoundedRectangle(roundedRect, brush2, strokeWidth, strokeStyleObj);
+		SafeRelease(&strokeStyleObj);
 	}
 
 	if (brush != NULL) {
