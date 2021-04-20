@@ -28,7 +28,7 @@
 
 D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color, LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
 	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign, DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle,
-	DWRITE_FONT_STRETCH fstretch, DWRITE_WORD_WRAPPING fwrap)
+	DWRITE_FONT_STRETCH fstretch, DWRITE_WORD_WRAPPING fwrap, D2D1_DRAW_TEXT_OPTIONS options)
 {
 	RetrieveContext(ctx);
 
@@ -47,7 +47,7 @@ D2DLIB_API void DrawBrushString(HANDLE ctx, LPCWSTR text, HANDLE color, LPCWSTR 
 		if (color != NULL) {
 			BrushContext* brushContext = reinterpret_cast<BrushContext*>(color);
 			brush = brushContext->brush;
-			context->renderTarget->DrawText(text, wcslen(text), textFormat, rect, brush);
+			context->renderTarget->DrawText(text, wcslen(text), textFormat, rect, brush, options);
 		}
 	}
 
@@ -57,7 +57,7 @@ D2DLIB_API void DrawColorString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
 	LPCWSTR fontName, FLOAT fontSize, D2D1_RECT_F* rect,
 	DWRITE_TEXT_ALIGNMENT halign, DWRITE_PARAGRAPH_ALIGNMENT valign,
 	DWRITE_FONT_WEIGHT fweight, DWRITE_FONT_STYLE fstyle,
-	DWRITE_FONT_STRETCH fstretch, DWRITE_WORD_WRAPPING fwrap)
+	DWRITE_FONT_STRETCH fstretch, DWRITE_WORD_WRAPPING fwrap, D2D1_DRAW_TEXT_OPTIONS options)
 {
 	RetrieveContext(ctx);
 
@@ -76,7 +76,7 @@ D2DLIB_API void DrawColorString(HANDLE ctx, LPCWSTR text, D2D1_COLOR_F color,
 
 		hr = (context->renderTarget)->CreateSolidColorBrush(color, &brush);
 		if (SUCCEEDED(hr) && brush != NULL) {
-			context->renderTarget->DrawText(text, wcslen(text), textFormat, rect, brush);
+			context->renderTarget->DrawText(text, wcslen(text), textFormat, rect, brush, options);
 		}
 	}
 
