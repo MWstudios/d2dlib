@@ -121,7 +121,6 @@ void ResizeContext(HANDLE handle)
 	GetClientRect(context->hwnd, &rc);
 
 	D2D1_SIZE_U size = D2D1::SizeU(rc.right - rc.left, rc.bottom - rc.top);
-
 	context->renderTarget->Resize(size);
 }
 

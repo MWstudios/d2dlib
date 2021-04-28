@@ -348,7 +348,6 @@ void DrawPolygonWithBrushes(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 		ID2D1StrokeStyle* strokeStyle = NULL;
 		factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyle);
 		renderTarget->DrawGeometry(path, reinterpret_cast<BrushContext*>(strokeBrush)->brush, strokeWidth, strokeStyle);
-		//SafeRelease(&brush2);
 		SafeRelease(&strokeStyle);
 	}
 

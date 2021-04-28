@@ -28,36 +28,32 @@
 #include "Brush.h"
 
 void DrawLine(HANDLE ctx, D2D1_POINT_2F start, D2D1_POINT_2F end, D2D1_COLOR_F color,
-	FLOAT width, D2D1_DASH_STYLE dashStyle, D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap)
+	FLOAT width, D2D1_DASH_STYLE dashStyle, D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
 {
 	RetrieveContext(ctx);
-
 	ID2D1SolidColorBrush* brush = NULL;
+	if (color.a > 0) context->renderTarget->CreateSolidColorBrush(color, &brush);
+	if (brush != NULL)
+	{
+		BrushContext brushCtx;
+		brushCtx.brush = brush;
+		DrawLineWithBrush(ctx, &brushCtx, start, end, width, dashStyle, startCap, endCap, gapCap, lineJoin);
+	}
+	SafeRelease(&brush);
+}
+void DrawLineWithBrush(HANDLE ctx, HANDLE brushHandle, D2D1_POINT_2F start, D2D1_POINT_2F end,
+	FLOAT width, D2D1_DASH_STYLE dashStyle, D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+{
+	RetrieveContext(ctx);
 	ID2D1StrokeStyle* strokeStyle = NULL;
-
-	context->renderTarget->CreateSolidColorBrush(color, &brush);
-
+	ID2D1Brush* brush = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(brushHandle)->brush);
 	if (brush != NULL) {
-
-		if (dashStyle != D2D1_DASH_STYLE_SOLID ||
-			startCap != D2D1_CAP_STYLE_FLAT ||
-			endCap != D2D1_CAP_STYLE_FLAT)
-		{
-			context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
-				startCap,
-				endCap,
-				D2D1_CAP_STYLE_ROUND,
-				D2D1_LINE_JOIN_MITER,
-				10.0f,
-				dashStyle,
-				0.0f), NULL, 0, &strokeStyle);
-		}
-
+		context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
+			startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyle);
 		context->renderTarget->DrawLine(start, end, brush, width, strokeStyle);
 	}
 
 	SafeRelease(&strokeStyle);
-	SafeRelease(&brush);
 }
 
 void DrawArrowLine(HANDLE ctx, D2D1_POINT_2F start, D2D1_POINT_2F end, D2D1_COLOR_F color,
@@ -157,35 +153,32 @@ void DrawLines(HANDLE ctx, D2D1_POINT_2F* points, UINT count, D2D1_COLOR_F color
 }
 
 void DrawRectangle(HANDLE ctx, D2D1_RECT_F* rect, D2D1_COLOR_F color,
-	FLOAT width, D2D1_DASH_STYLE dashStyle)
+	FLOAT width, D2D1_DASH_STYLE dashStyle, D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
 {
 	RetrieveContext(ctx);
-
 	ID2D1SolidColorBrush* brush = NULL;
+	if (color.a > 0) context->renderTarget->CreateSolidColorBrush(color, &brush);
+	if (brush != NULL)
+	{
+		BrushContext brushCtx;
+		brushCtx.brush = brush;
+		DrawRectangleWithBrush(ctx, rect, &brushCtx, width, dashStyle, startCap, endCap, gapCap, lineJoin);
+	}
+	SafeRelease(&brush);
+}
+void DrawRectangleWithBrush(HANDLE ctx, D2D1_RECT_F* rect, HANDLE brushHandle,
+	FLOAT width, D2D1_DASH_STYLE dashStyle, D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+{
+	RetrieveContext(ctx);
 	ID2D1StrokeStyle* strokeStyle = NULL;
-
-	context->renderTarget->CreateSolidColorBrush(color, &brush);
-
+	ID2D1Brush* brush = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(brushHandle)->brush);
 	if (brush != NULL) {
-
-		if (dashStyle != D2D1_DASH_STYLE_SOLID) {
-			context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
-				D2D1_CAP_STYLE_FLAT,
-				D2D1_CAP_STYLE_FLAT,
-				D2D1_CAP_STYLE_ROUND,
-				D2D1_LINE_JOIN_MITER,
-				10.0f,
-				dashStyle,
-				0.0f), NULL, 0, &strokeStyle);
-		}
-
+		context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
+			startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyle);
 		context->renderTarget->DrawRectangle(rect, brush, width, strokeStyle);
 	}
-
-	SafeRelease(&brush);
 	SafeRelease(&strokeStyle);
 }
-
 
 void DrawRectangleWithPen(HANDLE ctx, D2D1_RECT_F* rect, HANDLE strokePen, FLOAT width)
 {
@@ -234,6 +227,13 @@ D2DLIB_API void DrawRoundedRect(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect, D2D1
 	ID2D1SolidColorBrush* fillBrush = NULL;
 	ID2D1StrokeStyle* strokeStyleObj = NULL;
 
+	if (fillColor.a > 0) {
+		context->renderTarget->CreateSolidColorBrush(fillColor, &fillBrush);
+
+		if (fillBrush != NULL) {
+			context->renderTarget->FillRoundedRectangle(roundedRect, fillBrush);
+		}
+	}
 	if (strokeColor.a > 0 && strokeWidth > 0) {
 		context->renderTarget->CreateSolidColorBrush(strokeColor, &strokeBrush);
 
@@ -249,13 +249,6 @@ D2DLIB_API void DrawRoundedRect(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect, D2D1
 		}
 	}
 
-	if (fillColor.a > 0) {
-		context->renderTarget->CreateSolidColorBrush(fillColor, &fillBrush);
-
-		if (fillBrush != NULL) {
-			context->renderTarget->FillRoundedRectangle(roundedRect, fillBrush);
-		}
-	}
 
 	SafeRelease(&strokeBrush);
 	SafeRelease(&strokeStyleObj);
@@ -271,13 +264,13 @@ D2DLIB_API void DrawRoundedRectWithBrush(HANDLE ctx, D2D1_ROUNDED_RECT* roundedR
 	BrushContext* brushContext = reinterpret_cast<BrushContext*>(fillBrush);
 	ID2D1Brush* brush = reinterpret_cast<ID2D1Brush*>(brushContext->brush);
 
+	if (brush != NULL) {
+		context->renderTarget->FillRoundedRectangle(roundedRect, brush);
+	}
 	if (pen != NULL) {
 		context->renderTarget->DrawRoundedRectangle(roundedRect, pen->brush, strokeWidth, pen->strokeStyle);
 	}
 
-	if (brush != NULL) {
-		context->renderTarget->FillRoundedRectangle(roundedRect, brush);
-	}
 }
 
 D2DLIB_API void DrawRoundedRectWithBrushes(HANDLE ctx, D2D1_ROUNDED_RECT* roundedRect,
@@ -289,6 +282,9 @@ D2DLIB_API void DrawRoundedRectWithBrushes(HANDLE ctx, D2D1_ROUNDED_RECT* rounde
 	ID2D1Brush* brush = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(fillBrush)->brush);
 	ID2D1Brush* brush2 = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(strokeBrush)->brush);
 
+	if (brush != NULL) {
+		context->renderTarget->FillRoundedRectangle(roundedRect, brush);
+	}
 	if (brush2 != NULL) {
 		ID2D1StrokeStyle* strokeStyleObj = NULL;
 		context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties( startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyleObj);
@@ -296,40 +292,38 @@ D2DLIB_API void DrawRoundedRectWithBrushes(HANDLE ctx, D2D1_ROUNDED_RECT* rounde
 		SafeRelease(&strokeStyleObj);
 	}
 
-	if (brush != NULL) {
-		context->renderTarget->FillRoundedRectangle(roundedRect, brush);
-	}
 }
 
-void DrawEllipse(HANDLE handle, D2D1_ELLIPSE* ellipse, D2D1_COLOR_F color,
-								 FLOAT width, D2D1_DASH_STYLE dashStyle)
+void DrawEllipse(HANDLE ctx, D2D1_ELLIPSE* ellipse, D2D1_COLOR_F color, FLOAT width, D2D1_DASH_STYLE dashStyle,
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
 {
-	D2DContext* context = reinterpret_cast<D2DContext*>(handle);
-
+	RetrieveContext(ctx);
 	ID2D1SolidColorBrush* brush = NULL;
+	if (color.a > 0) context->renderTarget->CreateSolidColorBrush(color, &brush);
+	if (brush != NULL)
+	{
+		BrushContext brushCtx;
+		brushCtx.brush = brush;
+		DrawEllipseWithBrush(ctx, ellipse, &brushCtx, width, dashStyle, startCap, endCap, gapCap, lineJoin);
+	}
+	SafeRelease(&brush);
+}
+void DrawEllipseWithBrush(HANDLE ctx, D2D1_ELLIPSE* ellipse, HANDLE brushHandle,
+	FLOAT width, D2D1_DASH_STYLE dashStyle,
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+{
+	RetrieveContext(ctx);
+	ID2D1Brush* brush = reinterpret_cast<ID2D1Brush*>(reinterpret_cast<BrushContext*>(brushHandle)->brush);
 	ID2D1StrokeStyle* strokeStyle = NULL;
-
-	(context->renderTarget)->CreateSolidColorBrush(color, &brush);
-
 	if (brush != NULL) {
-
 		if (dashStyle != D2D1_DASH_STYLE_SOLID)
 		{
 			context->factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(
-				D2D1_CAP_STYLE_FLAT,
-				D2D1_CAP_STYLE_FLAT,
-				D2D1_CAP_STYLE_ROUND,
-				D2D1_LINE_JOIN_MITER,
-				10.0f,
-				dashStyle,
-				0.0f), NULL, 0, &strokeStyle);
+				startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyle);
 		}
-
 		context->renderTarget->DrawEllipse(ellipse, brush, width, strokeStyle);
 	}
-
 	SafeRelease(&strokeStyle);
-	SafeRelease(&brush);
 }
 
 void FillEllipse(HANDLE handle, D2D1_ELLIPSE* ellipse, D2D1_COLOR_F color)
