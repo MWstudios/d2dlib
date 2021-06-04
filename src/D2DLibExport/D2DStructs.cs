@@ -61,20 +61,26 @@ namespace unvell.D2DLib
 			this.b = color.b;
 		}
 
-		public static D2DColor operator *(D2DColor c, float s)
-		{
-			return new D2DColor(c.a, c.r * s, c.g * s, c.b * s);
-		}
-
 		public static bool operator ==(D2DColor c1, D2DColor c2)
-		{
-			return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b && c1.a == c2.a;
-		}
-
+		{ return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b && c1.a == c2.a; }
 		public static bool operator !=(D2DColor c1, D2DColor c2)
-		{
-			return c1.r != c2.r || c1.g != c2.g || c1.b != c2.b || c1.a != c2.a;
-		}
+		{ return c1.r != c2.r || c1.g != c2.g || c1.b != c2.b || c1.a != c2.a; }
+		public static D2DColor operator +(D2DColor c, float s)
+		{ return new D2DColor(c.a + s, c.r + s, c.g + s, c.b + s); }
+		public static D2DColor operator -(D2DColor c, float s)
+		{ return new D2DColor(c.a - s, c.r - s, c.g - s, c.b - s); }
+		public static D2DColor operator *(D2DColor c, float s)
+		{ return new D2DColor(c.a, c.r * s, c.g * s, c.b * s); }
+		public static D2DColor operator /(D2DColor c, float s)
+		{ return new D2DColor(c.a / s, c.r / s, c.g / s, c.b / s); }
+		public static D2DColor operator +(D2DColor c, D2DColor c2)
+		{ return new D2DColor(c.a + c2.a, c.r + c2.r, c.g + c2.g, c.b + c2.b); }
+		public static D2DColor operator -(D2DColor c, D2DColor c2)
+		{ return new D2DColor(c.a - c2.a, c.r - c2.r, c.g - c2.g, c.b - c2.b); }
+		public static D2DColor operator *(D2DColor c, D2DColor c2)
+		{ return new D2DColor(c.a * c2.a, c.r * c2.r, c.g * c2.g, c.b * c2.b); }
+		public static D2DColor operator /(D2DColor c, D2DColor c2)
+		{ return new D2DColor(c.a / c2.a, c.r / c2.r, c.g / c2.g, c.b / c2.b); }
 
 		public override bool Equals(object obj)
 		{
@@ -125,6 +131,7 @@ namespace unvell.D2DLib
 			White = FromGDIColor(Color.White),
 			SlateGray = FromGDIColor(Color.SlateGray),
 			DarkSlateGray = FromGDIColor(Color.DarkSlateGray),
+			LightSlateGray = FromGDIColor(Color.LightSlateGray),
 			WhiteSmoke = FromGDIColor(Color.WhiteSmoke),
 			Honeydew = FromGDIColor(Color.Honeydew),
 			FloralWhite = FromGDIColor(Color.FloralWhite),
@@ -182,6 +189,7 @@ namespace unvell.D2DLib
 			OliveDrab = FromGDIColor(Color.OliveDrab),
 			ForestGreen = FromGDIColor(Color.ForestGreen),
 			GreenYellow = FromGDIColor(Color.GreenYellow),
+			Chartreuse = FromGDIColor(Color.Chartreuse),
 
 			AliceBlue = FromGDIColor(Color.AliceBlue),
 			LightBlue = FromGDIColor(Color.LightBlue),
@@ -191,6 +199,7 @@ namespace unvell.D2DLib
 			DeepSkyBlue = FromGDIColor(Color.DeepSkyBlue),
 			DodgerBlue = FromGDIColor(Color.DodgerBlue),
 			SteelBlue = FromGDIColor(Color.SteelBlue),
+			LightSteelBlue = FromGDIColor(Color.LightSteelBlue),
 			BlueViolet = FromGDIColor(Color.BlueViolet),
 			CadetBlue = FromGDIColor(Color.CadetBlue),
 			PowderBlue = FromGDIColor(Color.PowderBlue),
@@ -200,6 +209,7 @@ namespace unvell.D2DLib
 			SlateBlue = FromGDIColor(Color.SlateBlue),
 			MediumSlateBlue = FromGDIColor(Color.MediumSlateBlue),
 			DarkSlateBlue = FromGDIColor(Color.DarkSlateBlue),
+			Navy = FromGDIColor(Color.Navy),
 
 			Violet = FromGDIColor(Color.Violet),
 			DarkViolet = FromGDIColor(Color.DarkViolet),
@@ -243,6 +253,7 @@ namespace unvell.D2DLib
 			NavajoWhite = FromGDIColor(Color.NavajoWhite),
 			Tan = FromGDIColor(Color.Tan),
 			Wheat = FromGDIColor(Color.Wheat),
+
 			OldLace = FromGDIColor(Color.OldLace),
 			MistyRose = FromGDIColor(Color.MistyRose),
 			Khaki = FromGDIColor(Color.Khaki),
@@ -251,7 +262,9 @@ namespace unvell.D2DLib
 			PapayaWhip = FromGDIColor(Color.PapayaWhip),
 			BlanchedAlmond = FromGDIColor(Color.BlanchedAlmond),
 			Linen = FromGDIColor(Color.Linen),
-			PeachPuff = FromGDIColor(Color.PeachPuff)
+			PeachPuff = FromGDIColor(Color.PeachPuff),
+			LemonChiffon = FromGDIColor(Color.LemonChiffon),
+			SeaShell = FromGDIColor(Color.SeaShell)
 			;
 	}
 	#endregion
