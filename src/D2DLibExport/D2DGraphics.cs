@@ -22,22 +22,16 @@
  * SOFTWARE.
  */
 
+#pragma warning disable CS1591 // Komentář XML pro veřejně viditelný typ nebo člen se nenašel.
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 
 using FLOAT = System.Single;
-using UINT = System.UInt32;
-using UINT32 = System.UInt32;
-using HWND = System.IntPtr;
 using HANDLE = System.IntPtr;
-using HRESULT = System.Int64;
-using BOOL = System.Int32;
 
 namespace unvell.D2DLib
 {
-	public class D2DGraphics
+  public class D2DGraphics
 	{
 		internal HANDLE Handle { get; }
 
@@ -95,96 +89,101 @@ namespace unvell.D2DLib
 				{ D2D.SetContextTextProperties(this.Handle, value); this.textantialias = value; } }
     }
 
-		public void DrawLine(FLOAT x1, FLOAT y1, FLOAT x2, FLOAT y2, D2DColor color,
-			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
+    public void DrawLine(FLOAT x1, FLOAT y1, FLOAT x2, FLOAT y2, D2DColor color,
+            FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			DrawLine(new D2DPoint(x1, y1), new D2DPoint(x2, y2), color, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			DrawLine(new D2DPoint(x1, y1), new D2DPoint(x2, y2), color, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawLine(FLOAT x1, FLOAT y1, FLOAT x2, FLOAT y2, D2DBrush brush,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawLineWithBrush(this.Handle, brush.Handle, new D2DPoint(x1, y1), new D2DPoint(x2, y2), weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawLineWithBrush(this.Handle, brush.Handle, new D2DPoint(x1, y1), new D2DPoint(x2, y2), weight,
+				dashStyle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawLine(D2DPoint start, D2DPoint end, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawLine(this.Handle, start, end, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawLine(this.Handle, start, end, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
-		public void DrawLines(D2DPoint[] points, D2DColor color, FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid)
+		public void DrawLines(D2DPoint[] points, D2DColor color, FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
+			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawLines(this.Handle, points, (uint)points.Length, color, weight, dashStyle);
+			D2D.DrawLines(this.Handle, points, (uint)points.Length, color, weight,
+				dashStyle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawEllipse(FLOAT x, FLOAT y, FLOAT width, FLOAT height, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			var ellipse = new D2DEllipse(x, y, width / 2f, height / 2f);
 			ellipse.origin.x += ellipse.radiusX;
 			ellipse.origin.y += ellipse.radiusY;
 
-			this.DrawEllipse(ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			this.DrawEllipse(ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawEllipse(D2DPoint origin, D2DSize radial, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			var ellipse = new D2DEllipse(origin, radial);
-			this.DrawEllipse(ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			this.DrawEllipse(ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawEllipse(D2DPoint origin, FLOAT radialX, FLOAT radialY, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			var ellipse = new D2DEllipse(origin, radialX, radialY);
-			this.DrawEllipse(ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			this.DrawEllipse(ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawEllipse(D2DEllipse ellipse, D2DColor color, FLOAT weight = 1,
 			D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawEllipse(this.Handle, ref ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawEllipse(this.Handle, ref ellipse, color, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 		public void DrawEllipse(D2DPoint origin, D2DSize radial, D2DBrush brush,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			var ellipse = new D2DEllipse(origin, radial);
-			this.DrawEllipse(ellipse, brush, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			this.DrawEllipse(ellipse, brush, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawEllipse(D2DPoint origin, FLOAT radialX, FLOAT radialY, D2DBrush brush,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			var ellipse = new D2DEllipse(origin, radialX, radialY);
-			this.DrawEllipse(ellipse, brush, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			this.DrawEllipse(ellipse, brush, weight, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawEllipse(D2DEllipse ellipse, D2DBrush brush, FLOAT weight = 1,
 			D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawEllipseWithBrush(this.Handle, ref ellipse, brush.Handle, weight, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawEllipseWithBrush(this.Handle, ref ellipse, brush.Handle, weight,
+				dashStyle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void FillEllipse(D2DPoint p, FLOAT radial, D2DColor color)
@@ -237,23 +236,26 @@ namespace unvell.D2DLib
 		public void DrawPolygon(D2DPoint[] points,
 			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DColor fillColor,
 			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
-			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawPolygon(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillColor, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawPolygon(Handle, points, (uint)points.Length, strokeColor, strokeWidth,
+				dashStyle, fillColor, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawPolygon(D2DPoint[] points,
 			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DBrush fillBrush,
 			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
-			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawPolygonWithBrush(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawPolygonWithBrush(Handle, points, (uint)points.Length, strokeColor, strokeWidth, dashStyle, fillBrush.Handle,
+				startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 		public void DrawPolygon(D2DPoint[] points, D2DBrush fillBrush, D2DBrush outlineBrush, FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Round, D2DCapStyle endCap = D2DCapStyle.Round,
-			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Flat, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawPolygonWithBrushes(Handle, points, (uint)points.Length, outlineBrush.Handle, strokeWidth, dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawPolygonWithBrushes(Handle, points, (uint)points.Length, outlineBrush.Handle, strokeWidth,
+				dashStyle, fillBrush.Handle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 #if DEBUG
 		public void TestDraw()
@@ -275,7 +277,7 @@ namespace unvell.D2DLib
     public D2DLayer PushLayer(D2DGeometry geometry = null)
     {
       // FIXME: resolve to not use magic number
-      D2DRect rectBounds = new D2DRect(-999999, -999999, 999999999, 999999999);
+      D2DRect rectBounds = new D2DRect(float.MinValue, float.MinValue, float.MaxValue, float.MaxValue);
 
       return PushLayer(rectBounds, geometry);
     }
@@ -351,35 +353,38 @@ namespace unvell.D2DLib
 		public void DrawRectangle(FLOAT x, FLOAT y, FLOAT w, FLOAT h, D2DColor color, FLOAT strokeWidth = 1,
 			D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			D2DRect rect = new D2DRect(x, y, w, h);
-			D2D.DrawRectangle(this.Handle, ref rect, color, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawRectangle(this.Handle, ref rect, color, strokeWidth, dashStyle,
+				startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawRectangle(FLOAT x, FLOAT y, FLOAT w, FLOAT h, D2DBrush brush, FLOAT strokeWidth = 1,
 			D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
 			D2DRect rect = new D2DRect(x, y, w, h);
-			D2D.DrawRectangleWithBrush(this.Handle, ref rect, brush.Handle, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawRectangleWithBrush(this.Handle, ref rect, brush.Handle, strokeWidth, dashStyle,
+				startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawRectangle(D2DRect rect, D2DColor color, FLOAT strokeWidth = 1,
 			D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawRectangle(this.Handle, ref rect, color, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawRectangle(this.Handle, ref rect, color, strokeWidth, dashStyle,
+				startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawRectangle(D2DPoint origin, D2DSize size, D2DColor color, FLOAT strokeWidth = 1,
 			D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			this.DrawRectangle(new D2DRect(origin, size), color, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+			this.DrawRectangle(new D2DRect(origin, size), color, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin, customDashes);
 		}
 
 		public void DrawRectangle(D2DRect rect, D2DPen strokePen, FLOAT strokeWidth = 1)
@@ -417,16 +422,18 @@ namespace unvell.D2DLib
 		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DColor strokeColor, D2DColor fillColor,
 			FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawRoundedRect(this.Handle, ref roundedRect, strokeColor, fillColor, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawRoundedRect(this.Handle, ref roundedRect, strokeColor, fillColor, strokeWidth, dashStyle,
+				startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DBrush strokeBrush, D2DBrush fillBrush,
 			FLOAT strokeWidth = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter)
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null)
 		{
-			D2D.DrawRoundedRectWithBrushes(this.Handle, ref roundedRect, strokeBrush.Handle, fillBrush.Handle, strokeWidth, dashStyle, startCap, endCap, gapCap, lineJoin);
+			D2D.DrawRoundedRectWithBrushes(this.Handle, ref roundedRect, strokeBrush.Handle, fillBrush.Handle, strokeWidth,
+				dashStyle, startCap, endCap, gapCap, lineJoin, customDashes, (uint)(customDashes?.Length ?? 0));
 		}
 
 		public void DrawRoundedRectangle(D2DRoundedRect roundedRect, D2DPen strokePen, D2DBrush fillBrush, FLOAT strokeWidth = 1)
@@ -544,3 +551,4 @@ namespace unvell.D2DLib
 	}
 
 }
+#pragma warning restore CS1591 // Komentář XML pro veřejně viditelný typ nebo člen se nenašel.

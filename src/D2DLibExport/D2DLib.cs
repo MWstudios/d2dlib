@@ -154,27 +154,29 @@ namespace unvell.D2DLib
 		public static extern void DrawLine(HANDLE context, D2DPoint start, D2DPoint end, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawLineWithBrush(HANDLE context, HANDLE brush, D2DPoint start, D2DPoint end,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawLines(HANDLE context, D2DPoint[] points, UINT count, D2DColor color,
-			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid);
+			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
+			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawRectangle(HANDLE context, ref D2DRect rect, D2DColor color,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawRectangleWithBrush(HANDLE context, ref D2DRect rect, HANDLE brush,
 			FLOAT weight = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawRectangleWithPen(HANDLE context, ref D2DRect rect, HANDLE strokePen, FLOAT weight = 1);
@@ -189,7 +191,7 @@ namespace unvell.D2DLib
 		public static extern void DrawRoundedRect(HANDLE ctx, ref D2DRoundedRect roundedRect,
 			D2DColor strokeColor, D2DColor fillColor, FLOAT strokeWidth, D2DDashStyle strokeStyle,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawRoundedRectWithBrush(HANDLE ctx, ref D2DRoundedRect roundedRect,
@@ -198,19 +200,19 @@ namespace unvell.D2DLib
 		public static extern void DrawRoundedRectWithBrushes(HANDLE ctx, ref D2DRoundedRect roundedRect,
 			HANDLE strokeBrush, HANDLE fillBrush, float strokeWidth, D2DDashStyle strokeStyle,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawEllipse(HANDLE context, ref D2DEllipse rect, D2DColor color,
 			FLOAT width = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawEllipseWithBrush(HANDLE context, ref D2DEllipse rect, HANDLE brush,
 			FLOAT width = 1, D2DDashStyle dashStyle = D2DDashStyle.Solid,
 			D2DCapStyle startCap = D2DCapStyle.Flat, D2DCapStyle endCap = D2DCapStyle.Flat,
-			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter);
+			D2DCapStyle gapCap = D2DCapStyle.Round, D2DLineJoinStyle lineJoin = D2DLineJoinStyle.Miter, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void FillEllipse(HANDLE context, ref D2DEllipse rect, D2DColor color);
@@ -271,17 +273,17 @@ namespace unvell.D2DLib
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawPolygon(HANDLE ctx, D2DPoint[] points, UINT count,
 			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, D2DColor fillColor,
-			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawPolygonWithBrush(HANDLE ctx, D2DPoint[] points, UINT count,
 			D2DColor strokeColor, FLOAT strokeWidth, D2DDashStyle dashStyle, HANDLE brushHandler,
-			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DrawPolygonWithBrushes(HANDLE ctx, D2DPoint[] points, UINT count,
 			HANDLE outlineBrush, FLOAT strokeWidth, D2DDashStyle dashStyle, HANDLE brushHandler,
-			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin);
+			D2DCapStyle startCap, D2DCapStyle endCap, D2DCapStyle gapCap, D2DLineJoinStyle lineJoin, float[] customDashes = null, uint CDcount = 0);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetPathStartPoint(HANDLE ctx, D2DPoint startPoint);

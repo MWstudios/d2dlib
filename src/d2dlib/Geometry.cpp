@@ -293,7 +293,7 @@ void DrawBeziers(HANDLE ctx, D2D1_BEZIER_SEGMENT* bezierSegments, UINT count,
 
 void DrawPolygon(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 	D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, D2D1_COLOR_F fillColor,
-	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin, float* customDashes, UINT32 CDcount)
 {
 	RetrieveContext(ctx);
 	ID2D1SolidColorBrush* fillBrush = NULL;
@@ -307,14 +307,15 @@ void DrawPolygon(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 	if (fillBrush != NULL) {
 		BrushContext brushCtx;
 		brushCtx.brush = fillBrush;
-		DrawPolygonWithBrush(ctx, points, count, strokeColor, strokeWidth, dashStyle, &brushCtx, startCap, endCap, gapCap, lineJoin);
+		DrawPolygonWithBrush(ctx, points, count, strokeColor, strokeWidth, dashStyle,
+			&brushCtx, startCap, endCap, gapCap, lineJoin, customDashes, CDcount);
 		SafeRelease(&fillBrush);
 	}
 }
 
 void DrawPolygonWithBrushes(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 	HANDLE strokeBrush, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle,
-	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin, float* customDashes, UINT32 CDcount)
 {
 	RetrieveContext(ctx);
 	HRESULT hr;
@@ -346,7 +347,8 @@ void DrawPolygonWithBrushes(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 	if (strokeBrush != NULL && strokeWidth > 0)
 	{
 		ID2D1StrokeStyle* strokeStyle = NULL;
-		factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f), NULL, 0, &strokeStyle);
+		factory->CreateStrokeStyle(D2D1::StrokeStyleProperties(startCap, endCap, gapCap, lineJoin, 10.0f, dashStyle, 0.0f),
+			customDashes, CDcount, &strokeStyle);
 		renderTarget->DrawGeometry(path, reinterpret_cast<BrushContext*>(strokeBrush)->brush, strokeWidth, strokeStyle);
 		SafeRelease(&strokeStyle);
 	}
@@ -357,7 +359,7 @@ void DrawPolygonWithBrushes(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 }
 void DrawPolygonWithBrush(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 	D2D1_COLOR_F strokeColor, FLOAT strokeWidth, D2D1_DASH_STYLE dashStyle, HANDLE brushHandle,
-	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin)
+	D2D1_CAP_STYLE startCap, D2D1_CAP_STYLE endCap, D2D1_CAP_STYLE gapCap, D2D1_LINE_JOIN lineJoin, float* customDashes, UINT32 CDcount)
 {
 	RetrieveContext(ctx);
 	HRESULT hr;
@@ -368,7 +370,8 @@ void DrawPolygonWithBrush(HANDLE ctx, D2D1_POINT_2F* points, UINT count,
 		hr = renderTarget->CreateSolidColorBrush(strokeColor, &strokeBrush);
 		BrushContext brush; brush.brush = strokeBrush;
 		if (strokeBrush != NULL) {
-			DrawPolygonWithBrushes(ctx, points, count, &brush, strokeWidth, dashStyle, brushHandle, startCap, endCap, gapCap, lineJoin);
+			DrawPolygonWithBrushes(ctx, points, count, &brush, strokeWidth, dashStyle, brushHandle,
+				startCap, endCap, gapCap, lineJoin, customDashes, CDcount);
 			SafeRelease(&strokeBrush);
 		}
 
