@@ -8,6 +8,7 @@
     <RootNamespace>unvell.D2DLib.WinForm</RootNamespace>
     <AssemblyName>d2dwinform</AssemblyName>
     <UseWindowsForms>true</UseWindowsForms>
+    <TargetPlatformVersion>8.0</TargetPlatformVersion>
   </PropertyGroup>
 
   <!-- Package properties -->
@@ -29,6 +30,13 @@
 
   <ItemGroup>
     <None Include="..\..\package\logo_d2dlib.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Windows">
+      <HintPath>C:\Program Files (x86)\Microsoft SDKs\Portable\v15.0\0A8F3DD1C770E53724F799E57E75D39F\Windows.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
   </ItemGroup>
 
   <!--

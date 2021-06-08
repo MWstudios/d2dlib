@@ -21,15 +21,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+#pragma warning disable CS1591 // Komentář XML pro veřejně viditelný typ nebo člen se nenašel.
 
 using System;
 using System.Windows.Forms;
+//using System.Runtime.InteropServices;
 
 namespace unvell.D2DLib.WinForm
 {
 	public class D2DForm : Form
 	{
 		private D2DDevice device;
+		//private IntPtr windowHandle;
+		//public IntPtr Handle { get { return windowHandle; } }
 		public D2DDevice Device
 		{
 			get
@@ -98,7 +102,6 @@ namespace unvell.D2DLib.WinForm
 			base.CreateHandle();
 
 			this.DoubleBuffered = false;
-
 			if (this.device == null)
 			{
 				this.device = D2DDevice.FromHwnd(this.Handle);
@@ -116,14 +119,16 @@ namespace unvell.D2DLib.WinForm
 					SceneChanged = false;
 				}
 			};
+			//dynamic c = Windows.UI.Core.CoreWindow.GetForCurrentThread();
+			//windowHandle = ((ICoreWindowInterop)c).WindowHandle;
 		}
 
-		protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs e)
+		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			// prevent the .NET windows form to paint the original background
 		}
 		
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+		protected override void OnPaint(PaintEventArgs e)
 		{
 			if (this.DesignMode)
 			{
@@ -171,7 +176,7 @@ namespace unvell.D2DLib.WinForm
 			}
 		}
 
-		protected override void WndProc(ref System.Windows.Forms.Message m)
+		protected override void WndProc(ref Message m)
 		{
 			switch (m.Msg)
 			{
@@ -208,8 +213,8 @@ namespace unvell.D2DLib.WinForm
 			base.Invalidate(false);
 		}
 
-		protected override void OnKeyDown(KeyEventArgs e)
-		{
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
 			base.OnKeyDown(e);
 
 			switch (e.KeyCode)
@@ -219,5 +224,13 @@ namespace unvell.D2DLib.WinForm
 					break;
 			}
 		}
+		/*[ComImport, Guid("45D64A29-A63E-4CB6-B498-5781D298CB4F")]
+		[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+		interface ICoreWindowInterop
+		{
+			IntPtr WindowHandle { get; }
+			bool MessageHandled { set; }
+		}*/
 	}
 }
+#pragma warning restore CS1591 // Komentář XML pro veřejně viditelný typ nebo člen se nenašel.

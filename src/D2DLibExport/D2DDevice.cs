@@ -21,19 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#pragma warning disable CS1591 // Komentář XML pro veřejně viditelný typ nebo člen se nenašel.
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
 using FLOAT = System.Single;
 using UINT = System.UInt32;
-using UINT32 = System.UInt32;
 using HWND = System.IntPtr;
 using HANDLE = System.IntPtr;
-using HRESULT = System.Int64;
-using BOOL = System.Int32;
 
 namespace unvell.D2DLib
 {
@@ -270,9 +266,10 @@ namespace unvell.D2DLib
 				: new D2DBitmapGraphics(bitmapRenderTargetHandle);
 		}
 
-		public void Dispose()
-		{
+    public void Dispose()
+    {
 			D2D.DestroyContext(this.Handle);
 		}
 	}
 }
+#pragma warning restore CS1591 // Komentář XML pro veřejně viditelný typ nebo člen se nenašel.

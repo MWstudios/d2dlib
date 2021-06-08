@@ -43,12 +43,10 @@ HANDLE CreateContext(HWND hwnd)
 	context->matrixStack = new std::stack<D2D1_MATRIX_3X2_F>();
 
 	hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &context->factory);
-	
 	if (!SUCCEEDED(hr)) {
 		context->lastErrorCode = hr;
 		return NULL;
 	}
-
 	hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,
 			__uuidof(context->writeFactory), reinterpret_cast<IUnknown **>(&context->writeFactory));
 
@@ -134,7 +132,6 @@ void SetContextProperties(HANDLE ctx, D2D1_ANTIALIAS_MODE antialiasMode)
 void SetContextTextProperties(HANDLE ctx, D2D1_TEXT_ANTIALIAS_MODE antialiasMode)
 {
 	RetrieveContext(ctx);
-
 	context->renderTarget->SetTextAntialiasMode(antialiasMode);
 }
 
