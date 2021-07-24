@@ -48,7 +48,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.0|x64'">
-    <DocumentationFile>D:\Github\d2dlib\d2dlib\src\D2DWinForm\d2dwinform.xml</DocumentationFile>
+    <DocumentationFile>d2dwinform.xml</DocumentationFile>
   </PropertyGroup>
   <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
     <ItemGroup>
