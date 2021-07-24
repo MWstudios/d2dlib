@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.0|x64'">
-    <DocumentationFile>D:\Github\d2dlib\d2dlib\src\D2DLibExport\d2dlibexport.xml</DocumentationFile>
+    <DocumentationFile>d2dlibexport.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
